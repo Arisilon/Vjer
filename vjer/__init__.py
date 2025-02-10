@@ -11,7 +11,7 @@ __all__ = ('__title__', '__summary__', '__uri__',
 
 __title__ = 'Vjer'
 __summary__ = 'CI/CD Toolkit'
-__uri__ = 'https://github.com/tardis4500/vjer/'
+__uri__ = 'https://github.com/arisilon/vjer/'
 
 __version__ = '37.0.1rc0'
 __build_name__ = '{var:build_name}'
