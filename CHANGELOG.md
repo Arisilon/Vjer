@@ -7,12 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
+### [37.0.1] - Unreleased
+
+- Changed
+  - Migrated repo to Arisilon organization. (GitHub #24)
+
+## Release History
+
 ### [37.0.0] - 2025-01-01
 
 - Changed
-  - Upgraded to Python 2.13. (GitHub #22)
-
-## Release History
+  - Upgraded to Python 3.12. (GitHub #22)
 
 ### [36.1.3] - 2024-07-06
 
