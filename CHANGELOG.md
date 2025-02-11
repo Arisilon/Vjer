@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Changed
   - Migrated repo to Arisilon organization. (GitHub #24)
+  - Used released tag for workflow actions.
 
 ## Release History
 
