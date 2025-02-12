@@ -10,11 +10,11 @@ test:
     - type: mypy
 build:
   steps:
-    - type: flit
+    - type: setuptools
 release:
   steps:
     - type: bumpver
-    - type: flit_build
+    - type: setuptools_build
       release_only: true
     - type: github
       release_only: true

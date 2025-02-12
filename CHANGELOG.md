@@ -7,11 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
-### [37.0.1] - Unreleased
+### [37.1.0] - 2025-02-12
+
+- Added
+  - Added support for setuptools builds. (GitHub #26)
 
 - Changed
   - Migrated repo to Arisilon organization. (GitHub #24)
   - Used released tag for workflow actions.
+  - Use setuptools build.
 
 ## Release History
 

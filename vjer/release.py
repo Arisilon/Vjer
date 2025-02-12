@@ -66,6 +66,10 @@ class ReleaseStep(VjerStep):
         self.log_message(f'Incrementing release to {new_version} on branch {use_branch}')
         self.commit_files('Automated pipeline version update check-in [skip ci]', use_branch, self.config.filename, file_updater=self.config.write)
 
+    def release_setuptools_build(self) -> None:
+        """Run a Python setuptools build."""
+        self.setuptools_build()
+
     def release_tag_source(self) -> None:
         """Tag the source in Git with a release tag."""
         self.tag_source(self.release.release_tag, f'Release {self.release.release_tag}')

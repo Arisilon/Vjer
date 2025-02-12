@@ -1,13 +1,14 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "vjer"
+description = "CI/CD Toolkit"
 authors = [{ name = "Jeffery G. Smith", email = "web@pobox.com" }]
 readme = "DOCUMENTATION.md"
 license = { file = "LICENSE" }
-dynamic = ["version", "description"]
+dynamic = ["version"]
 
 requires-python = "~=3.12"
 keywords = ["python", "programming", "utilities"]
@@ -25,6 +26,7 @@ classifiers = [
 
 dependencies = [
     "BatCave",
+    "build",
     "bumpver",
     "junitparser",
     "flake8",
@@ -49,6 +51,12 @@ homepage = "https://github.com/arisilon/vjer/"
 documentation = "https://vjer.readthedocs.io"
 repository = "https://github.com/arisilon/vjer/"
 changelog = "https://github.com/arisilon/vjer/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+packages = ["vjer"]
+
+[tool.setuptools.dynamic]
+version = { attr = "vjer.__version__" }
 
 [tool.flake8]
 max-line-length = 200
@@ -85,7 +93,7 @@ module = "xmlrunner.*"
 ignore_missing_imports = true
 
 [tool.bumpver]
-current_version = "v37.0.1rc0"
+current_version = "v37.1.0rc0"
 version_pattern = "vMAJOR.MINOR.PATCH[PYTAGNUM]"
 commit_message = "bump version {old_version} -> {new_version} [skip ci]"
 commit = true

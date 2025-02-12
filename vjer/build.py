@@ -12,6 +12,7 @@ from batcave.fileutil import pack
 from batcave.lang import str_to_pythonval
 from batcave.sysutil import rmpath
 from docker.errors import BuildError as DockerBuildError
+from build import ProjectBuilder
 
 # Import project modules
 from .utils import VJER_ENV, VjerAction, VjerStep, helm
@@ -113,6 +114,11 @@ class BuildStep(VjerStep):
         """Build method for Helm charts."""
         helm('dependency', 'build', self.helm_chart_root)
         self.helm_build()
+
+    def build_setuptools(self) -> None:
+        """Run a Python setuptools build."""
+        ProjectBuilder(self.project.project_root).build('sdist', self.project.artifacts_dir)
+        ProjectBuilder(self.project.project_root).build('wheel', self.project.artifacts_dir)
 
 
 def build() -> None:
