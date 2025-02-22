@@ -48,7 +48,6 @@ jobs:
       action: build
       os: ubuntu-latest
       python-version: "3.12"
-      use-flit: true
       vjer-local: true
 
   install-test:
