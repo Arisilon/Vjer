@@ -22,6 +22,7 @@ env:
   ARTIFACTS_DIR: artifacts
   GH_TOKEN: ${{ github.token }}
   VJER_ENV: development
+  VJER_PYPROJECT_BUILD: true
 
 jobs:
   test:
@@ -48,6 +49,7 @@ jobs:
     with:
       action: build
       os: ubuntu-latest
+      pyproject-build: "true"
       python-version: "3.12"
       vjer-local: true
 
