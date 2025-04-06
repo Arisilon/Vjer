@@ -15,7 +15,7 @@ from tomllib import load as load_toml
 # Import third-party modules
 from batcave.commander import Argument, Commander
 from batcave.fileutil import slurp
-from batcave.sysutil import SysCmdRunner
+from batcave.sysutil import CMDError, SysCmdRunner
 from batcave.version import AppVersion, VersionStyle
 from dotmap import DotMap
 from flit.install import Installer
@@ -87,7 +87,11 @@ def _sys_initialize() -> None:
         if pyproject_build:
             pyproject = _toml_to_dotmap('pyproject.toml')
             if pyproject['build-system']['build-backend'] == 'setuptools.build_meta':
-                pip_install('.[test]')
+                try:
+                    pip_install('.[test]')
+                except CMDError as err:
+                    if "WARNING: Failed to remove contents in a temporary directory" not in str(err):
+                        raise
             if pyproject['build-system']['build-backend'] == 'flit.buildapi':
                 Installer.from_ini_path(Path('pyproject.toml')).install()
 
