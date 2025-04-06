@@ -22,6 +22,7 @@ env:
   ARTIFACTS_DIR: artifacts
   GH_TOKEN: ${{ github.token }}
   VJER_ENV: development
+  VJER_PYPROJECT_BUILD: true
 
 jobs:
   test:
@@ -140,4 +141,4 @@ jobs:
           name: ${{ env.ARTIFACTS_DIR }}-released
           path: ${{ env.ARTIFACTS_DIR }}
 
-# cSpell:ignore pypa
+# cSpell:ignore pypa pyproject
