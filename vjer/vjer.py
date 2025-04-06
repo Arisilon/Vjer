@@ -10,12 +10,14 @@ from os import getenv
 from pathlib import Path
 from platform import platform, system
 from sys import exit as sys_exit, stderr, version as python_version
+from tomllib import load as load_toml
 
 # Import third-party modules
 from batcave.commander import Argument, Commander
 from batcave.fileutil import slurp
 from batcave.sysutil import SysCmdRunner
 from batcave.version import AppVersion, VersionStyle
+from dotmap import DotMap
 from flit.install import Installer
 
 # Import local modules
@@ -48,6 +50,12 @@ def _pip_setup() -> None:
     pip_install('setuptools', 'wheel')
 
 
+def _toml_to_dotmap(file_path: str) -> DotMap:
+    """Reads a TOML file and returns its content as a dictionary."""
+    with open(file_path, 'rb') as file:
+        return DotMap(load_toml(file))
+
+
 def _setup_environment() -> None:
     try:
         config = ProjectConfig()
@@ -77,10 +85,14 @@ def _sys_initialize() -> None:
         if pip_file:
             pip_install(requirement=pip_file)
         if pyproject_build:
-            Installer.from_ini_path(Path('pyproject.toml')).install()
+            pyproject = _toml_to_dotmap('pyproject.toml')
+            if pyproject['build-system']['build-backend'] == 'setuptools.build_meta':
+                pip_install('.[test]')
+            if pyproject['build-system']['build-backend'] == 'flit.buildapi':
+                Installer.from_ini_path(Path('pyproject.toml')).install()
 
 
 if __name__ == '__main__':
     main()
 
-# cSpell:ignore putenv
+# cSpell:ignore putenv buildapi
