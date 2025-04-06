@@ -51,5 +51,3 @@ class PreReleaseStep(ReleaseStep):
 def pre_release() -> None:
     """This is the main entry point."""
     VjerAction('release', cast(VjerStep, PreReleaseStep)).execute()
-
-# cSpell:ignore batcave vjer bumpver

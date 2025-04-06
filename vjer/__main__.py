@@ -8,5 +8,3 @@ from . import vjer
 
 if __name__ == '__main__':
     vjer.main()
-
-# cSpell:ignore vjer

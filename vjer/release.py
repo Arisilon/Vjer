@@ -79,4 +79,4 @@ def release() -> None:
     """This is the main entry point."""
     VjerAction('release', cast(VjerStep, ReleaseStep)).execute()
 
-# cSpell:ignore syscmd batcave cloudmgr vjer bumpver
+# cSpell:ignore syscmd

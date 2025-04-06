@@ -83,4 +83,4 @@ def get_helm_info(info_type: str) -> dict:
         helm_info['found'] = 'none'
     return helm_info if helm_info else {'found': 'none'}
 
-# cSpell:ignore batcave syscmd dotmap
+# cSpell:ignore syscmd

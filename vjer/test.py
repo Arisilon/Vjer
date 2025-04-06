@@ -79,4 +79,4 @@ def test() -> None:
     """This is the main entry point."""
     VjerAction('test', cast(VjerStep, TestStep)).execute()
 
-# cSpell:ignore batcave fileutil syscmd hadolint dockerfiles vjer junitparser xmlrunner
+# cSpell:ignore syscmd xmlrunner dockerfiles

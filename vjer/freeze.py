@@ -60,4 +60,4 @@ def freeze() -> None:
             print(line, file=freeze_file_stream)
     rmpath(venv_dir)
 
-# cSpell:ignore batcave fileutil syscmd
+# cSpell:ignore syscmd

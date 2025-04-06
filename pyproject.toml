@@ -7,18 +7,18 @@ name = "vjer"
 description = "CI/CD Toolkit"
 authors = [{ name = "Jeffery G. Smith", email = "web@pobox.com" }]
 readme = "DOCUMENTATION.md"
-license = { file = "LICENSE" }
+license-files = ["LICENSE"]
 dynamic = ["version"]
 
 requires-python = "~=3.12"
 keywords = ["programming", "utilities"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: MIT License",
 
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.12",
 
+    "Environment :: Console",
     "Intended Audience :: Developers",
     "Topic :: Software Development",
     "Natural Language :: English",
@@ -93,7 +93,7 @@ module = "xmlrunner.*"
 ignore_missing_imports = true
 
 [tool.bumpver]
-current_version = "v37.1.1rc0"
+current_version = "v38.0.0rc2"
 version_pattern = "vMAJOR.MINOR.PATCH[PYTAGNUM]"
 commit_message = "bump version {old_version} -> {new_version} [skip ci]"
 commit = true

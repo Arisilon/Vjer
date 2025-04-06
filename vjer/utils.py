@@ -39,7 +39,7 @@ _CONFIG_SECTIONS = ('project', 'test', 'build', 'deploy', 'rollback', 'release')
 _PROJECT_DEFAULTS = DotMap(build_artifacts='artifacts',
                            build_num_var='VJER_BUILD_NUM',
                            chart_root='helm-chart',
-                           container_registry=DotMap(type='local', name=''),
+                           container_registry=DotMap(type='local', auth=tuple(), name=''),
                            dockerfile='Dockerfile',
                            test_results='test_results',
                            version_service=DotMap(type='vjer'))
@@ -49,7 +49,9 @@ PROJECT_CFG_FILE = getenv('VJER_CFG', 'vjer.yml')
 TOOL_REPORT = Path(__file__).parent.absolute() / 'tool_report.yml'
 
 HELM_CHART_FILE = 'Chart.yaml'
-DEFAULT_VERSION_FILES = {'helm': [HELM_CHART_FILE, 'values.yaml']}
+DEFAULT_VERSION_FILES = {'helm': [HELM_CHART_FILE, 'values.yaml'],
+                         'flit': ['__init__.py'],
+                         'setuptools': ['__init__.py']}
 
 VJER_ENV = getenv('VJER_ENV', 'local')
 REMOTE_REF = 'vjer_origin'
@@ -354,7 +356,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         Returns:
             Nothing.
         """
-        self.registry_client = Cloud(CloudType.gcloud if (self.project.container_registry.type == 'gcp') else CloudType.local, login=login)
+        self.registry_client = Cloud(CloudType[self.project.container_registry.type], auth=self.project.container_registry.auth, login=login)
         self.docker_client = Cloud(CloudType.local)
         registry_name_path = f'{self.project.container_registry.name}/' if login else ''
         self.image_name = f'{registry_name_path}{self.step_info.image if self.step_info.image else self.project.name}'
@@ -516,8 +518,8 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         match self.step_info.type:
             case 'helm':
                 prefix = self.helm_chart_root
-            case 'python_module':
-                prefix = self.python_module_source
+            case 'flit' | 'setuptools':
+                prefix = Path(self.step_info.module if self.step_info.module else self.project.name)
             case _:
                 prefix = Path('.')
 
@@ -607,4 +609,4 @@ def sanitize_tag(tag: str, replacement_char: str = '-') -> str:
         raise ValueError(f"The sanitized tag '{sanitized_tag}' is still not valid according to Docker's specifications.")
     return sanitized_tag
 
-# cSpell:ignore batcave bumpver cloudmgr dotmap platarch syscmd vjer checkin
+# cSpell:ignore syscmd cloudmgr platarch checkin

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
+### [38.0.0] - Unreleased
+
+- Added
+  - Added support for container registry authentication. (GitHub #27)
+  - Added version file support for flit and setuptools builds. (GitHub #28)
+
+- Changed
+  - Set container registry type to match BatCave CloudType.
+
+## Release History
+
 ### [37.1.0] - 2025-02-12
 
 - Added
@@ -16,8 +27,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - Migrated repo to Arisilon organization. (GitHub #24)
   - Used released tag for workflow actions.
   - Use setuptools build.
-
-## Release History
 
 ### [37.0.0] - 2025-01-01
 

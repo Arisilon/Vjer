@@ -30,5 +30,3 @@ class DeployStep(VjerStep):
 def deploy() -> None:
     """This is the main entry point."""
     VjerAction('deploy', cast(VjerStep, DeployStep)).execute()
-
-# cSpell:ignore vjer

@@ -70,17 +70,17 @@ def _sys_initialize() -> None:
         apt('update')
         apt_install(pkg_installs)
 
-    if (pip_installs := getenv('VJER_PIP_INSTALLS', '')) or (pip_file := getenv('VJER_PIP_INSTALL_FILE', '')) or (use_flit := getenv('VJER_USE_FLIT', '')):
+    if (pip_installs := getenv('VJER_PIP_INSTALLS', '')) or (pip_file := getenv('VJER_PIP_INSTALL_FILE', '')) or (pyproject_build := getenv('VJER_PYPROJECT_BUILD', '')):
         _pip_setup()
         if pip_installs:
             pip_install(pip_installs)
         if pip_file:
             pip_install(requirement=pip_file)
-        if use_flit:
+        if pyproject_build:
             Installer.from_ini_path(Path('pyproject.toml')).install()
 
 
 if __name__ == '__main__':
     main()
 
-# cSpell:ignore batcave vjer fileutil syscmd putenv
+# cSpell:ignore putenv

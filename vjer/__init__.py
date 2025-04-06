@@ -13,7 +13,7 @@ __title__ = 'Vjer'
 __summary__ = 'CI/CD Toolkit'
 __uri__ = 'https://github.com/arisilon/vjer/'
 
-__version__ = '37.1.1rc0'
+__version__ = '38.0.0rc2'
 __build_name__ = '{var:build_name}'
 __build_date__ = '{var:build_date}'
 
@@ -21,6 +21,4 @@ __author__ = 'Jeffery G. Smith'
 __email__ = 'web@pobox.com'
 
 __license__ = 'MIT'
-__copyright__ = 'Copyright (c) 2024 Jeffery G. Smith'
-
-# cSpell:ignore vjer
+__copyright__ = 'Copyright (c) 2025 Jeffery G. Smith'
