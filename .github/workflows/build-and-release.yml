@@ -1,5 +1,5 @@
-name: Vjer  Build and Release
-run-name: Vjer  Build and Release - ${{ github.run_id }}
+name: Vjer Build and Release
+run-name: Vjer Build and Release - ${{ github.run_id }}
 
 on:
   workflow_dispatch:
@@ -22,14 +22,14 @@ env:
   ARTIFACTS_DIR: artifacts
   GH_TOKEN: ${{ github.token }}
   VJER_ENV: development
-  VJER_PYPROJECT_BUILD: true
 
 jobs:
   test:
-    uses: arisilon/shared-actions/.github/workflows/vjer.yml@released
+    uses: arisilon/shared-actions/.github/workflows/vjer.yml@main
     with:
       action: test
       os: ${{ matrix.os }}
+      pyproject-build: "true"
       python-version: ${{ matrix.python-version }}
       vjer-local: true
     strategy:
@@ -44,7 +44,7 @@ jobs:
 
   build:
     needs: test
-    uses: arisilon/shared-actions/.github/workflows/vjer.yml@released
+    uses: arisilon/shared-actions/.github/workflows/vjer.yml@main
     with:
       action: build
       os: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
 
   install-test:
     needs: build
-    uses: arisilon/shared-actions/.github/workflows/install-test.yml@released
+    uses: arisilon/shared-actions/.github/workflows/install-test.yml@main
     with:
       os: ${{ matrix.os }}
       python-version: ${{ matrix.python-version }}
