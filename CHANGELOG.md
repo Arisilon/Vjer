@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
-### [38.0.0] - Unreleased
+### [38.0.0] - 2025-04-12
 
 - Added
   - Added support for container registry authentication. (GitHub #27)
