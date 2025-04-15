@@ -93,8 +93,8 @@ module = "xmlrunner.*"
 ignore_missing_imports = true
 
 [tool.bumpver]
-current_version = "v38.0.1rc0"
-version_pattern = "vMAJOR.MINOR.PATCH[PYTAGNUM]"
+current_version = "38.0.1rc2"
+version_pattern = "MAJOR.MINOR.PATCH[PYTAGNUM]"
 commit_message = "bump version {old_version} -> {new_version} [skip ci]"
 commit = true
 tag = false

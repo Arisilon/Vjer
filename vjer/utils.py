@@ -276,7 +276,7 @@ class ProjectConfig:
     def _set_version(self) -> None:
         match self.project.version_service.type:
             case 'bumpver':
-                self.project.version = bumpver_config()[1].pep440_version
+                self.project.version = bumpver_config()[1].current_version
             case 'environment':
                 self.project.version = getenv(self.project.version_service.variable, '').rstrip('.')
             case 'vjer':

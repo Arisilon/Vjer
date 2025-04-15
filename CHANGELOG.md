@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
+### [39.0.0] - Unreleased
+
+- Changed
+  - Use bumpver current_version instead of pep440_version. (GitHub #30)
+
+## Release History
+
 ### [38.0.0] - 2025-04-12
 
 - Added
@@ -15,8 +22,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Changed
   - Set container registry type to match BatCave CloudType.
-
-## Release History
 
 ### [37.1.0] - 2025-02-12
 
