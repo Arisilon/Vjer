@@ -35,7 +35,7 @@ class ReleaseStep(VjerStep):
 
     def release_docker(self) -> None:
         """Perform a release of a Docker image by tagging."""
-        self._docker_init()
+        self._docker_init(is_pre_release=self.is_pre_release)
         default_tags = [self.version_tag.lower()]
         if not self.is_pre_release:
             default_tags.append(f'{self.image_name}:latest'.lower())

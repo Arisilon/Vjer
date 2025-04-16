@@ -80,7 +80,7 @@ class BuildStep(VjerStep):
     def build_docker(self) -> None:
         """Run a Docker build."""
         push_image = str_to_pythonval(getenv('VJER_DOCKER_PUSH', str(not VJER_ENV == 'local')))
-        self._docker_init(push_image)
+        self._docker_init(login=push_image)
         self.log_message(f'Building docker image: {self.image_tag}', True)
         build_args = {'VERSION': self.project.version,
                       'BUILD_VERSION': self.build.build_version} | self.step_info.build_args

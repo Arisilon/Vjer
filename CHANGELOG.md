@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Changed
   - Use bumpver current_version instead of pep440_version. (GitHub #30)
+  - Fix pre_release image tagging. (GitHub #31)
 
 - Removed
   - Removed Google Container Registry support.  (GitHub #29)
