@@ -467,7 +467,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         Returns:
             Nothing.
         """
-        if (registry := self.project.container_registry).type not in ('gcp', 'gcp-art'):
+        if (registry := self.project.container_registry).type != 'gcloud':
             (image := self.registry_client.get_image(source_tag)).pull()
         for tag in tags:
             (repo, candidate_tag) = tag.split(':', 1) if (':' in tag) else ('', tag)
@@ -475,9 +475,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
             final_tag = f'{repo}:{sanitized_tag}' if (':' in tag) else sanitized_tag
             self.log_message(f'Tagging image: {final_tag}')
             match registry.type:
-                case 'gcp':
-                    gcloud('container', 'images', 'add-tag', source_tag, final_tag, syscmd_args={'ignore_stderr': True})
-                case 'gcp-art':
+                case 'gcloud':
                     gcloud('artifacts', 'docker', 'tags', 'add', source_tag, final_tag, syscmd_args={'ignore_stderr': True})
                 case  _:
                     image.tag(final_tag)
