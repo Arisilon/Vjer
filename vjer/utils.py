@@ -346,7 +346,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
             raise AttributeError(f'No such attribute: {attr}')
         return getattr(self.step_info, attr) if getattr(self.step_info, attr) else getattr(self.project, attr)
 
-    def _docker_init(self, *, login: bool = True, is_pre_release: bool = False) -> None:
+    def _docker_init(self, *, login: bool = True) -> None:
         """Perform Docker initialization.
 
         Args:
@@ -361,7 +361,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         registry_name_path = f'{self.project.container_registry.name}/' if login else ''
         self.image_name = f'{registry_name_path}{self.step_info.image if self.step_info.image else self.project.name}'
         self.version_tag = f'{self.image_name}:{self.project.version}'
-        self.image_tag = (self.version_tag if is_pre_release else f'{self.version_tag}-{self.build.build_num}').lower()
+        self.image_tag = (self.version_tag if (self.project.version_service.type == 'bumpver') else f'{self.version_tag}-{self.build.build_num}').lower()
 
     @override
     def _execute(self) -> None:

@@ -19,7 +19,8 @@ class PreReleaseStep(ReleaseStep):
     def __init__(self):
         """Sets the project version to a pre_release value."""
         super().__init__()
-        self.project.version = f'{self.project.version}-{self.pre_release_num}'
+        if self.project.version_service.type != 'bumpver':
+            self.project.version = f'{self.project.version}-{self.pre_release_num}'
 
     @override
     def release_bumpver(self) -> None:
