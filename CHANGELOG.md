@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - Fix pre_release image tagging. (GitHub #31)
 
 - Removed
-  - Removed Google Container Registry support.  (GitHub #29)
+  - Removed Google Container Registry support. (GitHub #29)
 
 ## Release History
 

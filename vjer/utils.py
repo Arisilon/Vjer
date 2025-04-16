@@ -21,7 +21,7 @@ from typing import Callable, cast, Optional, override
 
 # Import third-party modules
 from batcave.automation import Action
-from batcave.cloudmgr import Cloud, CloudType, gcloud
+from batcave.cloudmgr import Cloud, CloudType
 from batcave.cms import Client, ClientType
 from batcave.expander import Expander, file_expander
 from batcave.lang import BatCaveError, BatCaveException, PathName, DEFAULT_ENCODING, WIN32, yaml_to_dotmap
@@ -467,19 +467,14 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         Returns:
             Nothing.
         """
-        if (registry := self.project.container_registry).type != 'gcloud':
-            (image := self.registry_client.get_image(source_tag)).pull()
+        (image := self.registry_client.get_image(source_tag)).pull()
         for tag in tags:
             (repo, candidate_tag) = tag.split(':', 1) if (':' in tag) else ('', tag)
             sanitized_tag = sanitize_tag(candidate_tag)
             final_tag = f'{repo}:{sanitized_tag}' if (':' in tag) else sanitized_tag
             self.log_message(f'Tagging image: {final_tag}')
-            match registry.type:
-                case 'gcloud':
-                    gcloud('artifacts', 'docker', 'tags', 'add', source_tag, final_tag, syscmd_args={'ignore_stderr': True})
-                case  _:
-                    image.tag(final_tag)
-                    image.push()
+            image.tag(final_tag)
+            image.push()
 
     def tag_source(self, tag: str, label: Optional[str] = None) -> None:
         """Tag the source in Git.
