@@ -467,7 +467,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         Returns:
             Nothing.
         """
-        (image := self.registry_client.get_image(source_tag)).pull()
+        (image := self.registry_client.get_image(source_tag.split('/')[-1])).pull()
         for tag in tags:
             (repo, candidate_tag) = tag.split(':', 1) if (':' in tag) else ('', tag)
             sanitized_tag = sanitize_tag(candidate_tag)
