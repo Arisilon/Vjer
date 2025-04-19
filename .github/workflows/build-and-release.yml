@@ -52,6 +52,7 @@ jobs:
       pyproject-build: "true"
       python-version: "3.12"
       vjer-local: true
+      use-pypi-test: true
 
   install-test:
     needs: build
