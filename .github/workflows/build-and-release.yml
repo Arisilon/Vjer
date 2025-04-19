@@ -26,13 +26,14 @@ env:
 
 jobs:
   test:
-    uses: arisilon/shared-actions/.github/workflows/vjer.yml@main
+    uses: arisilon/shared-actions/.github/workflows/vjer.yml@released
     with:
       action: test
       os: ${{ matrix.os }}
       pyproject-build: "true"
       python-version: ${{ matrix.python-version }}
       vjer-local: true
+      use-pypi-test: true
     strategy:
       matrix:
         os:
@@ -45,7 +46,7 @@ jobs:
 
   build:
     needs: test
-    uses: arisilon/shared-actions/.github/workflows/vjer.yml@main
+    uses: arisilon/shared-actions/.github/workflows/vjer.yml@released
     with:
       action: build
       os: ubuntu-latest
@@ -56,7 +57,7 @@ jobs:
 
   install-test:
     needs: build
-    uses: arisilon/shared-actions/.github/workflows/install-test.yml@main
+    uses: arisilon/shared-actions/.github/workflows/install-test.yml@released
     with:
       os: ${{ matrix.os }}
       python-version: ${{ matrix.python-version }}
