@@ -26,14 +26,17 @@ env:
 
 jobs:
   test:
-    uses: arisilon/shared-actions/.github/workflows/vjer.yaml@feature/vjer-action
-    with:
-      action: test
-      os: ${{ matrix.os }}
-      pyproject-build: "true"
-      python-version: ${{ matrix.python-version }}
-      vjer-local: true
-      use-pypi-test: true
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Run Vjer test
+        uses: arisilon/shared-actions/.github/actions/vjer@feature/vjer-action
+        with:
+          action: test
+          os: ${{ matrix.os }}
+          pyproject-build: true
+          python-version: ${{ matrix.python-version }}
+          vjer-local: true
+          use-pypi-test: true
     strategy:
       matrix:
         os:
@@ -41,19 +44,22 @@ jobs:
           - macos-latest
           - windows-latest
         python-version:
-          - "3.12"
-          - "3.13"
+          - 3.12
+          - 3.13
 
   build:
+    runs-on: ubuntu-latest
     needs: test
-    uses: arisilon/shared-actions/.github/workflows/vjer.yaml@feature/vjer-action
-    with:
-      action: build
-      os: ubuntu-latest
-      pyproject-build: "true"
-      python-version: "3.12"
-      vjer-local: true
-      use-pypi-test: true
+    steps:
+      - name: Run Vjer build
+        uses: arisilon/shared-actions/.github/actions/vjer@feature/vjer-action
+        with:
+          action: build
+          os: ubuntu-latest
+          pyproject-build: true
+          python-version: 3.12
+          vjer-local: true
+          use-pypi-test: true
 
   install-test:
     needs: build
