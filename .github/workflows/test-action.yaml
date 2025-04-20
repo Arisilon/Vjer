@@ -6,3 +6,12 @@ on:
 jobs:
   greet:
     uses: arisilon/shared-actions/.github/workflows/test-action.yaml@feature/vjer-action
+    with:
+      os: ${{ matrix.os }}
+      name: "Ada Lovelace"
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
