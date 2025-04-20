@@ -71,6 +71,7 @@ jobs:
       python-version: ${{ matrix.python-version }}
       test-action: "vjer test build release"
       test-dir: tests
+      use-pypi-test: true
     strategy:
       matrix:
         os:
