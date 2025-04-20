@@ -6,5 +6,3 @@ on:
 jobs:
   greet:
     uses: arisilon/shared-actions/.github/workflows/test-action.yaml@feature/vjer-action
-    with:
-      name: "Ada Lovelace"
