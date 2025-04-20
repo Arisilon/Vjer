@@ -55,6 +55,8 @@ jobs:
         uses: arisilon/shared-actions/.github/actions/vjer@feature/vjer-action
         with:
           action: build
+          dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+          dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
           os: ubuntu-latest
           pyproject-build: true
           python-version: 3.12
@@ -151,4 +153,4 @@ jobs:
           name: ${{ env.ARTIFACTS_DIR }}-released
           path: ${{ env.ARTIFACTS_DIR }}
 
-# cSpell:ignore pypa pyproject
+# cSpell:ignore dockerhub pypa pyproject
