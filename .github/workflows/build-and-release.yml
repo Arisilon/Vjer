@@ -26,7 +26,7 @@ env:
 
 jobs:
   test:
-    uses: arisilon/shared-actions/.github/workflows/vjer.yml@feature/vjer-action
+    uses: arisilon/shared-actions/.github/workflows/vjer.yaml@feature/vjer-action
     with:
       action: test
       os: ${{ matrix.os }}
@@ -46,7 +46,7 @@ jobs:
 
   build:
     needs: test
-    uses: arisilon/shared-actions/.github/workflows/vjer.yml@feature/vjer-action
+    uses: arisilon/shared-actions/.github/workflows/vjer.yaml@feature/vjer-action
     with:
       action: build
       os: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
 
   install-test:
     needs: build
-    uses: arisilon/shared-actions/.github/workflows/install-test.yml@feature/vjer-action
+    uses: arisilon/shared-actions/.github/workflows/install-test.yaml@feature/vjer-action
     with:
       os: ${{ matrix.os }}
       python-version: ${{ matrix.python-version }}
