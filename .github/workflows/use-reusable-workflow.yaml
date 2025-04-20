@@ -1,0 +1,10 @@
+name: Call Greet Reusable Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-remote:
+    uses: arisilon/shared-actions/.github/workflows/reusable-workflow.yaml@feature/vjer-action
+    with:
+      name: "Ada Lovelace"
