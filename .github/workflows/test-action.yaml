@@ -1,0 +1,22 @@
+name: Test Greeting
+
+on:
+    workflow_dispatch:
+
+jobs:
+  greet:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+            - ubuntu-latest
+            - windows-latest
+            - macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Say hello
+        uses: ./.github/actions/greet
+        with:
+          name: "Ada Lovelace"

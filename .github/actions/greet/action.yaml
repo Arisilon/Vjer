@@ -1,0 +1,15 @@
+name: Greet Action
+description: A cross-platform Python greeting
+inputs:
+  name:
+    description: Name to greet
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Run greet script
+      shell: python
+      run: |
+        import sys
+        name = "${{ inputs.name }}"
+        print(f"Hello, {name}!")
