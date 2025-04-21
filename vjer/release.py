@@ -71,7 +71,7 @@ class ReleaseStep(VjerStep):
     def release_pypi(self) -> None:
         """Perform a release of a Python package to PyPI."""
         twine_upload(Settings(repository_name=('testpypi' if self.step_info.test_pypi else 'pypi'), non_interactive=True, disable_progress_bar=True),
-                     [self.project.artifacts_dir])
+                     [str(self.project.artifacts_dir)])
 
     def release_setuptools_build(self) -> None:
         """Run a Python setuptools build."""
