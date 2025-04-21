@@ -89,10 +89,10 @@ jobs:
       id-token: write
     steps:
       - name: Run Vjer build
-        uses: arisilon/shared-actions/.github/actions/vjer@released
+        uses: arisilon/shared-actions/.github/actions/vjer@main
         with:
           action: pre_release
-          enable-git-commit: true
+          enable-git-commit: ${{ secrets.RELEASE_TOKEN }}
           os: ubuntu-latest
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           pyproject-build: true
