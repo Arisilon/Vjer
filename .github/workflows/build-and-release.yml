@@ -28,7 +28,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Run Vjer test
-        uses: arisilon/shared-actions/.github/actions/vjer@main
+        uses: arisilon/shared-actions/.github/actions/vjer@released
         with:
           action: test
           os: ${{ matrix.os }}
@@ -51,7 +51,7 @@ jobs:
     needs: test
     steps:
       - name: Run Vjer build
-        uses: arisilon/shared-actions/.github/actions/vjer@main
+        uses: arisilon/shared-actions/.github/actions/vjer@released
         with:
           action: build
           os: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
 
   install-test:
     needs: build
-    uses: arisilon/shared-actions/.github/workflows/install-test.yaml@main
+    uses: arisilon/shared-actions/.github/workflows/install-test.yaml@released
     with:
       os: ${{ matrix.os }}
       python-version: ${{ matrix.python-version }}
@@ -89,7 +89,7 @@ jobs:
       id-token: write
     steps:
       - name: Run Vjer build
-        uses: arisilon/shared-actions/.github/actions/vjer@main
+        uses: arisilon/shared-actions/.github/actions/vjer@released
         with:
           action: pre_release
           enable-git-commit: true
@@ -110,7 +110,7 @@ jobs:
       id-token: write
     steps:
       - name: Run Vjer build
-        uses: arisilon/shared-actions/.github/actions/vjer@main
+        uses: arisilon/shared-actions/.github/actions/vjer@released
         with:
           action: release
           enable-git-commit: true
