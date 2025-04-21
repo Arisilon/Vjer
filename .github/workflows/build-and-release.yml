@@ -90,6 +90,7 @@ jobs:
         with:
           action: pre_release
           os: ubuntu-latest
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
           pyproject-build: true
           python-version: 3.12
           vjer-local: true
