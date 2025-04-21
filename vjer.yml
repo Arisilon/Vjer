@@ -14,11 +14,10 @@ build:
 release:
   steps:
     - type: pypi
-      repo: Vjer
       test_pypi: true
-      pre_release_only: true
       username: __token__
       password: "{var:PYPI_TOKEN}"
+      pre_release_only: true
     - type: bumpver
     - type: setuptools_build
       release_only: true
@@ -31,7 +30,8 @@ release:
         tag: rc
         tag-num: True
     - type: pypi
-      repo: Vjer
+      username: __token__
+      password: "{var:PYPI_TOKEN}"
       release_only: true
 
 # cSpell: ignore bumpver vjer
