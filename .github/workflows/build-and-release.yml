@@ -81,7 +81,7 @@ jobs:
           - 3.13
 
   pre_release:
-    if: (github.event_name != 'pull_request') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/'))
+    if: (github.event_name != 'pull_request') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/') || startsWith(github.ref_name, 'feature/'))
     needs: install-test
     runs-on: ubuntu-latest
     steps:
