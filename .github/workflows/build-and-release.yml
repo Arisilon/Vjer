@@ -89,6 +89,7 @@ jobs:
         uses: arisilon/shared-actions/.github/actions/vjer@main
         with:
           action: pre_release
+          enable-git-commit: true
           os: ubuntu-latest
           pyproject-build: true
           python-version: 3.12
@@ -105,10 +106,10 @@ jobs:
         uses: arisilon/shared-actions/.github/actions/vjer@main
         with:
           action: release
+          enable-git-commit: true
           os: ubuntu-latest
           pyproject-build: true
           python-version: 3.12
           vjer-local: true
-          use-pypi-test: true
 
 # cSpell:ignore pyproject
