@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### [39.0.0] - Unreleased
 
+- Added
+  - Added PyPi publish support on release. (GitHub #32)
+
 - Changed
   - Use bumpver current_version instead of pep440_version. (GitHub #30)
   - Fix pre_release image tagging. (GitHub #31)

@@ -5,6 +5,8 @@ from typing import cast
 
 # Import third-party modules
 from batcave.sysutil import SysCmdRunner
+from twine.commands.upload import upload as twine_upload
+from twine.settings import Settings
 
 # Import project modules
 from .utils import helm, VjerAction, VjerStep
@@ -66,6 +68,13 @@ class ReleaseStep(VjerStep):
         self.log_message(f'Incrementing release to {new_version} on branch {use_branch}')
         self.commit_files('Automated pipeline version update check-in [skip ci]', use_branch, self.config.filename, file_updater=self.config.write)
 
+    def release_pypi(self) -> None:
+        """Perform a release of a Python package to PyPI."""
+        twine_upload(Settings(repository_name=('testpypi' if self.step_info.test_pypi else 'pypi'),
+                              username=self.step_info.username, password=self.step_info.password,
+                              non_interactive=True, disable_progress_bar=True),
+                     [f'{self.project.artifacts_dir}/*'])
+
     def release_setuptools_build(self) -> None:
         """Run a Python setuptools build."""
         self.setuptools_build()
@@ -79,4 +88,4 @@ def release() -> None:
     """This is the main entry point."""
     VjerAction('release', cast(VjerStep, ReleaseStep)).execute()
 
-# cSpell:ignore syscmd
+# cSpell:ignore syscmd testpypi

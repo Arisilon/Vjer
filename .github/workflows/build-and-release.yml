@@ -1,5 +1,4 @@
 name: Vjer Build and Release
-run-name: Vjer Build and Release - ${{ github.run_id }}
 
 on:
   workflow_dispatch:
@@ -55,8 +54,6 @@ jobs:
         uses: arisilon/shared-actions/.github/actions/vjer@main
         with:
           action: build
-          dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
-          dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
           os: ubuntu-latest
           pyproject-build: true
           python-version: 3.12
@@ -79,79 +76,47 @@ jobs:
           - macos-latest
           - windows-latest
         python-version:
-          - "3.12"
-          - "3.13"
+          - 3.12
+          - 3.13
 
   pre_release:
+    if: (github.event_name != 'pull_request') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/') || startsWith(github.ref_name, 'feature/'))
     needs: install-test
-    if: (github.event_name != 'pull_request') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/'))
-    permissions:
-      contents: write
-      id-token: write
     runs-on: ubuntu-latest
     environment: pre_release
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.RELEASE_TOKEN }}
-      - name: Setup Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-      - name: Install vjer
-        run: pip install .
-      - name: Prepare Git
-        run: |
-          git config user.name "${{ github.triggering_actor }}"
-          git config user.email "${{ github.triggering_actor }}@users.noreply.github.com"
-          git pull
-      - name: Publish to Test PyPi
-        uses: pypa/gh-action-pypi-publish@v1.12.4
-        with:
-          repository-url: https://test.pypi.org/legacy/
-          packages-dir: ${{ env.ARTIFACTS_DIR }}
-      - name: Run post-publish steps
-        run: vjer pre_release
-
-  release:
-    needs: pre_release
-    if: (github.event_name != 'pull_request') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/'))
     permissions:
       contents: write
       id-token: write
+    steps:
+      - name: Run Vjer build
+        uses: arisilon/shared-actions/.github/actions/vjer@main
+        with:
+          action: pre_release
+          enable-git-commit: true
+          os: ubuntu-latest
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          pyproject-build: true
+          python-version: 3.12
+          vjer-local: true
+          use-pypi-test: true
+
+  release:
+    if: (github.event_name != 'pull_request') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/'))
+    needs: pre_release
     runs-on: ubuntu-latest
     environment: release
+    permissions:
+      contents: write
+      id-token: write
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
+      - name: Run Vjer build
+        uses: arisilon/shared-actions/.github/actions/vjer@main
         with:
-          token: ${{ secrets.RELEASE_TOKEN }}
-      - name: Setup Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
-      - name: Install vjer
-        run: pip install .
-      - name: Prepare Git
-        run: |
-          git config user.name "${{ github.triggering_actor }}"
-          git config user.email "${{ github.triggering_actor }}@users.noreply.github.com"
-          git pull
-      - name: Run post-publish steps
-        run: vjer release
-      - name: Publish to PyPi
-        uses: pypa/gh-action-pypi-publish@v1.12.4
-        with:
-          packages-dir: ${{ env.ARTIFACTS_DIR }}
-      - name: Upload released artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.ARTIFACTS_DIR }}-released
-          path: ${{ env.ARTIFACTS_DIR }}
+          action: release
+          enable-git-commit: true
+          os: ubuntu-latest
+          pyproject-build: true
+          python-version: 3.12
+          vjer-local: true
 
-# cSpell:ignore dockerhub pypa pyproject
+# cSpell:ignore pyproject
