@@ -17,6 +17,8 @@ release:
       repo: Vjer
       test_pypi: true
       pre_release_only: true
+      username: __token__
+      password: "{var:PYPI_TOKEN}"
     - type: bumpver
     - type: setuptools_build
       release_only: true
