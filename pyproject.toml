@@ -35,6 +35,7 @@ dependencies = [
     "flit",
     "mypy",
     "pylint",
+    "twine",
     "unittest-xml-reporting",
 ]
 

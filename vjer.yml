@@ -13,6 +13,10 @@ build:
     - type: setuptools
 release:
   steps:
+    - type: pypi
+      repo: Vjer
+      test_pypi: true
+      pre_release_only: true
     - type: bumpver
     - type: setuptools_build
       release_only: true
@@ -24,5 +28,8 @@ release:
         patch: True
         tag: rc
         tag-num: True
+    - type: pypi
+      repo: Vjer
+      release_only: true
 
 # cSpell: ignore bumpver vjer
