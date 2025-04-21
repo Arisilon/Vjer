@@ -1,5 +1,4 @@
 name: Vjer Build and Release
-run-name: Vjer Build and Release - ${{ github.run_id }}
 
 on:
   workflow_dispatch:
