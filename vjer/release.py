@@ -70,7 +70,8 @@ class ReleaseStep(VjerStep):
 
     def release_pypi(self) -> None:
         """Perform a release of a Python package to PyPI."""
-        twine_upload(Settings(repository_name=self.step_info.repo, non_interactive=True, disable_progress_bar=True), ['dist/*'])
+
+        twine_upload(Settings(repository_name=('testpypi' if self.step_info.test_pypi else 'pypi'), non_interactive=True, disable_progress_bar=True), ['dist/*'])
 
     def release_setuptools_build(self) -> None:
         """Run a Python setuptools build."""
@@ -85,4 +86,4 @@ def release() -> None:
     """This is the main entry point."""
     VjerAction('release', cast(VjerStep, ReleaseStep)).execute()
 
-# cSpell:ignore syscmd
+# cSpell:ignore syscmd testpypi

@@ -84,6 +84,7 @@ jobs:
     if: (github.event_name != 'pull_request') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/') || startsWith(github.ref_name, 'feature/'))
     needs: install-test
     runs-on: ubuntu-latest
+    environment: pre_release
     steps:
       - name: Run Vjer build
         uses: arisilon/shared-actions/.github/actions/vjer@main
@@ -99,6 +100,7 @@ jobs:
     if: (github.event_name != 'pull_request') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/'))
     needs: pre_release
     runs-on: ubuntu-latest
+    environment: release
     steps:
       - name: Run Vjer build
         uses: arisilon/shared-actions/.github/actions/vjer@main
