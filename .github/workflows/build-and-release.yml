@@ -25,6 +25,6 @@ jobs:
   ci-cd:
     uses: arisilon/shared-actions/.github/workflows/python-cicd.yaml@main
     with:
-      skip-pypi-test: ${{ inputs.skip-pypi-test }}
+      skip-pypi-test: ${{ github.event.inputs.skip-pypi-test }}
       test-action: "vjer test build release"
     secrets: inherit
