@@ -275,3 +275,4 @@ $RECYCLE.BIN/
 artifacts/
 unit_test_results/
 vjer-*
+!vjer-rc.yml
