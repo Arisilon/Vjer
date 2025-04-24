@@ -2,6 +2,9 @@ name: Vjer Build and Release
 
 on:
   workflow_dispatch:
+    inputs:
+      skip-pypi-test:
+        type: boolean
   push:
     branches:
       - main
@@ -22,5 +25,6 @@ jobs:
   ci-cd:
     uses: arisilon/shared-actions/.github/workflows/python-cicd.yaml@main
     with:
+      skip-pypi-test: ${{ inputs.skip-pypi-test }}
       test-action: "vjer test build release"
     secrets: inherit
