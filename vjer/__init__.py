@@ -13,7 +13,7 @@ __title__ = 'Vjer'
 __summary__ = 'CI/CD Toolkit'
 __uri__ = 'https://github.com/arisilon/vjer/'
 
-__version__ = '39.0.0rc17'
+__version__ = '39.0.0rc18'
 __build_name__ = '{var:build_name}'
 __build_date__ = '{var:build_date}'
 
