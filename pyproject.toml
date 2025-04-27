@@ -25,7 +25,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "BatCave==46.0.0rc6",
+    "BatCave",
     "build",
     "bumpver",
     "junitparser",
