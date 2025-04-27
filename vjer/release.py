@@ -38,10 +38,13 @@ class ReleaseStep(VjerStep):
     def release_docker(self) -> None:
         """Perform a release of a Docker image by tagging."""
         self._docker_init()
-        default_tags = [self.version_tag.lower()]
-        if not self.is_pre_release:
-            default_tags.append(f'{self.image_name}:latest'.lower())
-        self.tag_images(self.image_tag, self.step_info.tags if self.step_info.tags else default_tags)
+        if self.step_info.tags:
+            tags = [f'{self.image_name}:{t}'.lower() for t in self.step_info.tags]
+        else:
+            tags = [self.version_tag.lower()]
+            if not self.is_pre_release:
+                tags.append(f'{self.image_name}:latest'.lower())
+        self.tag_images(self.image_tag, tags)
 
     def release_flit_build(self) -> None:
         """Run a Python flit build."""
