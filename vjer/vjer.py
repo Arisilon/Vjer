@@ -32,12 +32,14 @@ def main() -> None:
     version = AppVersion(__title__, __version__, __build_date__, __build_name__)
     args = Commander('Vjer CI/CD Automation Tool', [Argument('actions', choices=ACTIONS, nargs='+')], version=version).parse_args()
     VjerStep().log_message(version.get_info(VersionStyle.one_line), True)
-    _setup_environment()
+    config = _setup_environment()
     VjerStep().log_message(f'OS: {platform()}')
     if (system() == 'Linux') and (release_file := Path('/etc/os-release')).exists():
         for line in slurp(release_file):
             VjerStep().log_message(line.strip())
     VjerStep().log_message(f'Python version: {python_version}')
+    VjerStep().log_message(f'Project name: {config.project.name}', True)
+    VjerStep().log_message(f'Project version: {config.project.version}')
 
     _sys_initialize()
     for action in args.actions:
@@ -56,7 +58,7 @@ def _toml_to_dotmap(file_path: str) -> DotMap:
         return DotMap(load_toml(file))
 
 
-def _setup_environment() -> None:
+def _setup_environment() -> ProjectConfig:
     try:
         config = ProjectConfig()
     except ConfigurationError as err:
@@ -71,6 +73,7 @@ def _setup_environment() -> None:
         for (var, val) in config.project.environment.items():
             VjerStep().log_message(f'setting {var}={val}')
             os.environ[var] = val  # putenv doesn't work because the values are needed for this process.
+    return config
 
 
 def _sys_initialize() -> None:
