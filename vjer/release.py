@@ -52,7 +52,7 @@ class ReleaseStep(VjerStep):
 
     def release_github(self) -> None:
         """Create a GitHub release."""
-        SysCmdRunner('gh', 'release', 'create', f'v{self.project.version}', title=f'Release {self.project.version}', latest=True, generate_notes=True).run()
+        SysCmdRunner('gh', 'release', 'create', f'{self.project.version}', title=f'Release {self.project.version}', latest=True, generate_notes=True).run()
 
     def release_helm(self) -> None:
         """Perform a release of a Helm chart."""
@@ -84,7 +84,7 @@ class ReleaseStep(VjerStep):
 
     def release_tag_source(self) -> None:
         """Tag the source in Git with a release tag."""
-        self.tag_source(self.release.release_tag, f'Release {self.release.release_tag}')
+        self.tag_source(self.project.version, f'Release {self.project.version}')
 
 
 def release() -> None:

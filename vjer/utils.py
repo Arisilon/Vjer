@@ -290,7 +290,6 @@ class ProjectConfig:
                                           build_version=build_version,
                                           build_version_msbuild=f'{self.project.version}.{build_num}',
                                           build_name=f'{self.project.name}_{build_version}'))
-        self.release.update_defaults(DotMap(release_tag=f'v{self.project.version}'))
         for (piece, index) in {'major': 0, 'minor': 1, 'patch': 2}.items():
             self.project.update_defaults({f'{piece}': self.project.version.split('.', 2)[index]})
 
