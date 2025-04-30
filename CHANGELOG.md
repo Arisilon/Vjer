@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
-### [39.0.0] - Unreleased
+### [39.0.0] - 2025-04-30
 
 - Added
   - Added PyPi publish support on release. (GitHub #32)
