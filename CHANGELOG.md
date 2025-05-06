@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
+### [39.0.1] - 2025-05-06
+
+- Changed
+  - Fixed setuptools build on release. (GitHub #36)
+
+## Release History
+
 ### [39.0.0] - 2025-04-30
 
 - Added
@@ -19,8 +26,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Removed
   - Removed Google Container Registry support. (GitHub #29)
-
-## Release History
 
 ### [38.0.0] - 2025-04-12
 
