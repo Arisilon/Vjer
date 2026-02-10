@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### [39.0.2] - 2026-02-10
 
 - Changed
-  - Fixed setuptools build on release. (GitHub #36)
+  - Fixed setuptools build on release. (GitHub #37)
 
 ## Release History
 
