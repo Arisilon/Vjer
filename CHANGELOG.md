@@ -7,12 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
-### [39.0.1] - 2025-05-06
+### [39.0.2] - 2025-02-10
 
 - Changed
   - Fixed setuptools build on release. (GitHub #36)
 
 ## Release History
+
+### [39.0.1] - 2025-05-06
+
+- Changed
+  - Fixed setuptools build on release. (GitHub #36)
 
 ### [39.0.0] - 2025-04-30
 
