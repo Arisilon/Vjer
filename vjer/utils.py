@@ -124,6 +124,18 @@ class GitClient(Environment):
     def __exit__(self, *_unused_exc_info):
         return False
 
+    @property
+    def ci_remote_ref(self) -> str:
+        """Return the Git remote URL for the current CI environment."""
+        if ci_remote_ref := getenv('CI_REMOTE_REF'):
+            return ci_remote_ref
+        if ci_repository_url := getenv('CI_REPOSITORY_URL'):
+            return ci_repository_url
+        if github_repository := getenv('GITHUB_REPOSITORY'):
+            github_server = getenv('GITHUB_SERVER_URL', 'https://github.com').rstrip('/')
+            return f'{github_server}/{github_repository}.git'
+        raise AttributeError('Environment variable not found: CI_REMOTE_REF')
+
 
 class ConfigSection:
     """Base class to manage configuration sections."""
@@ -399,7 +411,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
 
     def commit_files(self, message: str, branch: str, *files, file_updater: Optional[Callable] = None) -> None:
         """Checkin files during to the source repository."""
-        self.git_client.client.add_remote_ref(remote_ref := REMOTE_REF, self.git_client.CI_REMOTE_REF, exists_ok=True)
+        self.git_client.client.add_remote_ref(remote_ref := REMOTE_REF, self.git_client.ci_remote_ref, exists_ok=True)
         git('fetch', all=True, syscmd_args={'ignore_stderr': True})
         git('remote', 'update', remote_ref, prune=True, syscmd_args={'ignore_stderr': True})
         git('checkout', '-B', branch, '--track', f'{remote_ref}/{branch}', syscmd_args={'ignore_stderr': True})
@@ -489,7 +501,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         self.log_message('Removing local tags and adding remote')
         for local_tag in [t.strip() for t in git('tag', list=True)]:
             git('tag', local_tag, delete=True)
-        self.git_client.client.add_remote_ref(REMOTE_REF, self.git_client.CI_REMOTE_REF, exists_ok=True)
+        self.git_client.client.add_remote_ref(REMOTE_REF, self.git_client.ci_remote_ref, exists_ok=True)
         self.log_message(f'Tagging the source with {tag}')
         self.git_client.client.add_label(tag, label, exists_ok=True)
         self.git_client.client.checkin_files('Automated pipeline tag check-in [skip ci]', remote=REMOTE_REF, tags=True, all_branches=False)
