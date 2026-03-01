@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Current Release
 
-### [39.0.3] - 2026-02-28
+### [39.0.3] - 2026-03-01
 
 - Changed
   - Fix tag_source on GutHub. (GitHub #38)
