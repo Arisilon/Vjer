@@ -60,8 +60,8 @@ class ReleaseStep(VjerStep):
 
     def release_increment_release(self) -> None:
         """Increment the project release version."""
-        if hasattr(self.project, 'version_service'):
-            self.log_message('Incrementing version service not supported...skipping')
+        if self.project.version_service != 'vjer':
+            self.log_message(f'Incrementing version service {self.project.version_service} not supported...skipping')
             return
         version_tuple = self.project.version.split('.')
         version_tuple[len(version_tuple) - 1] = str(int(version_tuple[-1]) + 1)
