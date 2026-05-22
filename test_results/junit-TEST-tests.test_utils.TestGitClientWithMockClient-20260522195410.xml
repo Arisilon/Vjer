@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_utils.TestGitClientWithMockClient-20260522195410" tests="2" file="tests/test_utils.py" time="0.004" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_utils.TestGitClientWithMockClient" name="test_git_client_active_branch" time="0.002" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="150">
+		<!--Test ci_commit_ref_name using active_branch from git client.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClientWithMockClient" name="test_git_client_with_git_repo" time="0.003" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="134">
+		<!--Test GitClient when .git directory exists.-->
+	</testcase>
+</testsuite>

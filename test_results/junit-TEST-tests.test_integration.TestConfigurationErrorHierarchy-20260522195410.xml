@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_integration.TestConfigurationErrorHierarchy-20260522195410" tests="2" file="tests/test_integration.py" time="0.000" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_integration.TestConfigurationErrorHierarchy" name="test_configuration_error_has_multiple_errors" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="100">
+		<!--Test ConfigurationError has defined error types.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationErrorHierarchy" name="test_configuration_error_is_exception" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="96">
+		<!--Test ConfigurationError is an exception.-->
+	</testcase>
+</testsuite>

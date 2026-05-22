@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_vjer_step.TestVjerStep-20260522195410" tests="8" file="tests/test_vjer_step.py" time="0.010" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_vjer_step.TestVjerStep" name="test_vjer_step_getattr_from_project" time="0.002" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="77">
+		<!--Test __getattr__ retrieves attributes from project.-->
+	</testcase>
+	<testcase classname="tests.test_vjer_step.TestVjerStep" name="test_vjer_step_getattr_from_step_info" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="102">
+		<!--Test __getattr__ prefers step_info over project.-->
+	</testcase>
+	<testcase classname="tests.test_vjer_step.TestVjerStep" name="test_vjer_step_getattr_invalid_attribute" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="127">
+		<!--Test __getattr__ raises for invalid attributes.-->
+	</testcase>
+	<testcase classname="tests.test_vjer_step.TestVjerStep" name="test_vjer_step_helm_args_property_empty" time="0.002" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="212">
+		<!--Test helm_args property when no values.-->
+	</testcase>
+	<testcase classname="tests.test_vjer_step.TestVjerStep" name="test_vjer_step_helm_chart_root_property" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="160">
+		<!--Test helm_chart_root property.-->
+	</testcase>
+	<testcase classname="tests.test_vjer_step.TestVjerStep" name="test_vjer_step_helm_repo_property" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="237">
+		<!--Test helm_repo property.-->
+	</testcase>
+	<testcase classname="tests.test_vjer_step.TestVjerStep" name="test_vjer_step_init" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="45">
+		<!--Test VjerStep initialization.-->
+	</testcase>
+	<testcase classname="tests.test_vjer_step.TestVjerStep" name="test_vjer_step_pkg_name_property" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="186">
+		<!--Test pkg_name property.-->
+	</testcase>
+</testsuite>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_utils.TestGitClient-20260522195410" tests="13" file="tests/test_utils.py" time="0.018" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_commit_ref_name_from_ci_branch" time="0.003" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="54">
+		<!--Test ci_commit_ref_name from CI_COMMIT_BRANCH environment.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_commit_ref_name_from_env" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="36">
+		<!--Test ci_commit_ref_name from CI_COMMIT_REF_NAME environment.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_commit_ref_name_from_github_ref" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="42">
+		<!--Test ci_commit_ref_name from GITHUB_REF environment.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_commit_ref_name_from_github_ref_tag" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="48">
+		<!--Test ci_commit_ref_name from GITHUB_REF with tag.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_commit_ref_name_missing" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="60">
+		<!--Test ci_commit_ref_name raises when no env var found.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_remote_ref_from_ci_repository_url" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="74">
+		<!--Test ci_remote_ref from CI_REPOSITORY_URL environment.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_remote_ref_from_env" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="68">
+		<!--Test ci_remote_ref from CI_REMOTE_REF environment.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_remote_ref_from_github" time="0.002" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="80">
+		<!--Test ci_remote_ref from GITHUB environment variables.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_remote_ref_from_github_default_server" time="0.002" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="86">
+		<!--Test ci_remote_ref from GITHUB with default server.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_ci_remote_ref_missing" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="92">
+		<!--Test ci_remote_ref raises when no env var found.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_context_manager" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="30">
+		<!--Test GitClient as context manager.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_init_with_defaults" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="15">
+		<!--Test GitClient initialization with default values.-->
+	</testcase>
+	<testcase classname="tests.test_utils.TestGitClient" name="test_git_client_init_with_parameters" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_utils.py" line="23">
+		<!--Test GitClient initialization with parameters.-->
+	</testcase>
+</testsuite>

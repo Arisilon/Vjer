@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_integration.TestConfigurationConstants-20260522195410" tests="10" file="tests/test_integration.py" time="0.002" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_bad_tag_characters" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="52">
+		<!--Test BAD_TAG_CHARACTERS constant.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_config_sections" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="23">
+		<!--Test _CONFIG_SECTIONS is defined correctly.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_default_version_files" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="65">
+		<!--Test DEFAULT_VERSION_FILES constant.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_helm_chart_file" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="61">
+		<!--Test HELM_CHART_FILE constant.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_project_config_file" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="38">
+		<!--Test PROJECT_CFG_FILE constant.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_project_defaults" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="31">
+		<!--Test _PROJECT_DEFAULTS is defined correctly.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_remote_ref" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="47">
+		<!--Test REMOTE_REF constant.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_replacer_holder" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="57">
+		<!--Test REPLACER_HOLDER constant.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_tool_report_path" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="43">
+		<!--Test TOOL_REPORT path.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestConfigurationConstants" name="test_vjer_env" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="72">
+		<!--Test VJER_ENV constant.-->
+	</testcase>
+</testsuite>

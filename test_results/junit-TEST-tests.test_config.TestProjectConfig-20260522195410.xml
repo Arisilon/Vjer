@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_config.TestProjectConfig-20260522195410" tests="5" file="tests/test_config.py" time="0.005" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_config.TestProjectConfig" name="test_project_config_init" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_config.py" line="138">
+		<!--Test ProjectConfig initialization.-->
+	</testcase>
+	<testcase classname="tests.test_config.TestProjectConfig" name="test_project_config_invalid_section" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_config.py" line="175">
+		<!--Test accessing an invalid configuration section.-->
+	</testcase>
+	<testcase classname="tests.test_config.TestProjectConfig" name="test_project_config_load_config_file_not_found" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_config.py" line="191">
+		<!--Test _load_config when config file doesn't exist.-->
+	</testcase>
+	<testcase classname="tests.test_config.TestProjectConfig" name="test_project_config_schema_attribute" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_config.py" line="210">
+		<!--Test schema attribute is accessible.-->
+	</testcase>
+	<testcase classname="tests.test_config.TestProjectConfig" name="test_project_config_section_access" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_config.py" line="155">
+		<!--Test accessing configuration sections.-->
+	</testcase>
+</testsuite>

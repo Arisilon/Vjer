@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_integration.TestStepError-20260522195410" tests="2" file="tests/test_integration.py" time="0.000" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_integration.TestStepError" name="test_step_error_is_exception" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="88">
+		<!--Test StepError is an exception.-->
+	</testcase>
+	<testcase classname="tests.test_integration.TestStepError" name="test_step_error_unknown_object" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="82">
+		<!--Test StepError.UNKNOWN_OBJECT error.-->
+	</testcase>
+</testsuite>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_test_module.TestTestStepTestMethods-20260522195410" tests="3" file="tests/test_test_module.py" time="0.005" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_test_module.TestTestStepTestMethods" name="test_test_flake8" time="0.002" timestamp="2026-05-22T19:54:10" file="tests\test_test_module.py" line="114">
+		<!--Test test_flake8 method calls SysCmdRunner.-->
+	</testcase>
+	<testcase classname="tests.test_test_module.TestTestStepTestMethods" name="test_test_mypy" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_test_module.py" line="140">
+		<!--Test test_mypy method calls SysCmdRunner.-->
+	</testcase>
+	<testcase classname="tests.test_test_module.TestTestStepTestMethods" name="test_test_pylint" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_test_module.py" line="166">
+		<!--Test test_pylint method calls SysCmdRunner.-->
+	</testcase>
+</testsuite>

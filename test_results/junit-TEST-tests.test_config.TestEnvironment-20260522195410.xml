@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_config.TestEnvironment-20260522195410" tests="3" file="tests/test_config.py" time="0.002" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_config.TestEnvironment" name="test_environment_getattr_existing_variable" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_config.py" line="19">
+		<!--Test getting an existing environment variable.-->
+	</testcase>
+	<testcase classname="tests.test_config.TestEnvironment" name="test_environment_getattr_missing_variable" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_config.py" line="25">
+		<!--Test getting a non-existing environment variable raises AttributeError.-->
+	</testcase>
+	<testcase classname="tests.test_config.TestEnvironment" name="test_environment_multiple_variables" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_config.py" line="33">
+		<!--Test accessing multiple environment variables.-->
+	</testcase>
+</testsuite>

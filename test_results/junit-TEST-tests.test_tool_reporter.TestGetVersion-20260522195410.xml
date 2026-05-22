@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.test_tool_reporter.TestGetVersion-20260522195410" tests="9" file="tests/test_tool_reporter.py" time="0.004" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_cmd_error" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="93">
+		<!--Test get_version when CMDError with 'not found' occurs.-->
+	</testcase>
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_cmd_error_not_related_to_not_found" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="107">
+		<!--Test get_version re-raises CMDError not related to 'not found'.-->
+	</testcase>
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_docker" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="68">
+		<!--Test get_version for Docker.-->
+	</testcase>
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_gcloud" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="171">
+		<!--Test get_version for Google Cloud SDK.-->
+	</testcase>
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_multiline_output" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="159">
+		<!--Test get_version with multiline output.-->
+	</testcase>
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_no_regex_match" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="147">
+		<!--Test get_version when regex doesn't match.-->
+	</testcase>
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_not_found" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="81">
+		<!--Test get_version when command is not found.-->
+	</testcase>
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_raw_output" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="134">
+		<!--Test get_version with raw=True.-->
+	</testcase>
+	<testcase classname="tests.test_tool_reporter.TestGetVersion" name="test_get_version_with_custom_args" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="120">
+		<!--Test get_version with custom args.-->
+	</testcase>
+</testsuite>
