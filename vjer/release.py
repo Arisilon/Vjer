@@ -31,10 +31,6 @@ class ReleaseStep(VjerStep):
             return
         super()._execute()
 
-    def release_bumpver(self) -> None:
-        """Perform a bumpver on release."""
-        bumpver_update(**(self.step_info.args if self.step_info.args else {'tag': 'final', 'tag-commit': True}))
-
     def release_docker(self) -> None:
         """Perform a release of a Docker image by tagging."""
         self._docker_init()
@@ -60,16 +56,19 @@ class ReleaseStep(VjerStep):
 
     def release_increment_release(self) -> None:
         """Increment the project release version."""
-        if self.project.version_service.type != 'vjer':
-            self.log_message(f'Incrementing version service {self.project.version_service} not supported...skipping')
-            return
-        version_tuple = self.project.version.split('.')
-        version_tuple[len(version_tuple) - 1] = str(int(version_tuple[-1]) + 1)
-        new_version = '.'.join(version_tuple)
-        use_branch = self.step_info.increment_branch if self.step_info.increment_branch else self.git_client.ci_commit_ref_name
-        self.project.version = new_version
-        self.log_message(f'Incrementing release to {new_version} on branch {use_branch}')
-        self.commit_files('Automated pipeline version update check-in [skip ci]', use_branch, self.config.filename, file_updater=self.config.write)
+        match self.project.version_service.type:
+            case 'vjer':
+                version_tuple = self.project.version.split('.')
+                version_tuple[len(version_tuple) - 1] = str(int(version_tuple[-1]) + 1)
+                new_version = '.'.join(version_tuple)
+                use_branch = self.step_info.increment_branch if self.step_info.increment_branch else self.git_client.ci_commit_ref_name
+                self.project.version = new_version
+                self.log_message(f'Incrementing release to {new_version} on branch {use_branch}')
+                self.commit_files('Automated pipeline version update check-in [skip ci]', use_branch, self.config.filename, file_updater=self.config.write)
+            case 'bumpver':
+                bumpver_update(**(self.step_info.args if self.step_info.args else {'tag': 'final', 'tag-commit': True}))
+            case _:
+                self.log_message(f'Incrementing version service {self.project.version_service} not supported...skipping')
 
     def release_pypi(self) -> None:
         """Perform a release of a Python package to PyPI."""

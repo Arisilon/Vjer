@@ -23,11 +23,11 @@ class PreReleaseStep(ReleaseStep):
             self.project.version = f'{self.project.version}-{self.pre_release_num}'
 
     @override
-    def release_bumpver(self) -> None:
-        """Perform a bumpver on release."""
+    def release_increment_release(self) -> None:
+        """Perform a version increment on pre-release."""
         if not self.step_info.args:
             self.step_info.args = {'tag-num': True}
-        super().release_bumpver()
+        super().release_increment_release()
 
     @override
     def release_helm(self) -> None:

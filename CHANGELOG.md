@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Changed
   - Upgrade to Python 3.14. (GitHub #39)
   - Fixed increment_version for version_service vjer. (GitHub #41)
+  - Remove bumpver release type and implement in increment_version. (GitHub #43)
 
 ## Release History
 
