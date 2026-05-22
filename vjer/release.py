@@ -84,6 +84,8 @@ class ReleaseStep(VjerStep):
     def release_tag_source(self) -> None:
         """Tag the source in Git with a release tag."""
         self.tag_source(self.project.version, f'Release {self.project.version}')
+        if self.step_info.release_tag:
+            self.tag_source(self.step_info.release_tag, force=True)
 
 
 def release() -> None:

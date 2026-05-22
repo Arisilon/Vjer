@@ -503,7 +503,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
             image.tag(final_tag)
             image.push()
 
-    def tag_source(self, tag: str, label: Optional[str] = None) -> None:
+    def tag_source(self, tag: str, label: Optional[str] = None, force: bool = False) -> None:
         """Tag the source in Git.
 
         Args:
@@ -519,7 +519,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         self.git_client.client.add_remote_ref(REMOTE_REF, self.git_client.ci_remote_ref, exists_ok=True)
         self.log_message(f'Tagging the source with {tag}')
         self.git_client.client.add_label(tag, label, exists_ok=True)
-        self.git_client.client.checkin_files('Automated pipeline tag check-in [skip ci]', remote=REMOTE_REF, tags=True, all_branches=False)
+        self.git_client.client.checkin_files('Automated pipeline tag check-in [skip ci]', remote=REMOTE_REF, tags=True, all_branches=False, force=force)
 
     def update_version_files(self, *, reset: bool = False) -> None:  # pylint: disable=too-many-branches
         """Updates the version files for the project.
