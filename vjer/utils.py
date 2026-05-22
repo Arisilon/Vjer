@@ -109,7 +109,7 @@ class GitClient(Environment):
             branch (optional, default=None): The branch to use for the Git client.
 
         Attributes:
-            CI_REMOTE_REF: The full git reference to the project.
+            ci_remote_ref: The full git reference to the project.
             branch: The value of the branch argument.
             client: The git client for the project.
             project_id: The value of the project_id argument.
@@ -125,6 +125,19 @@ class GitClient(Environment):
         return False
 
     @property
+    def ci_commit_ref_name(self) -> str:
+        """Return the Git reference name for the current CI environment."""
+        if ci_commit_ref_name := getenv('CI_COMMIT_REF_NAME'):
+            return ci_commit_ref_name
+        if github_ref := getenv('GITHUB_REF'):
+            return github_ref.removeprefix('refs/heads/').removeprefix('refs/tags/')
+        if ci_commit_branch := getenv('CI_COMMIT_BRANCH'):
+            return ci_commit_branch
+        if self.client and self.client.active_branch:
+            return self.client.active_branch
+        raise AttributeError('Environment variable not found: CI_COMMIT_REF_NAME')
+
+    @property
     def ci_remote_ref(self) -> str:
         """Return the Git remote URL for the current CI environment."""
         if ci_remote_ref := getenv('CI_REMOTE_REF'):
@@ -134,6 +147,8 @@ class GitClient(Environment):
         if github_repository := getenv('GITHUB_REPOSITORY'):
             github_server = getenv('GITHUB_SERVER_URL', 'https://github.com').rstrip('/')
             return f'{github_server}/{github_repository}.git'
+        if self.client and self.client._client.remotes:  # pylint: disable=protected-access
+            return self.client._client.remotes[0].url  # pylint: disable=protected-access
         raise AttributeError('Environment variable not found: CI_REMOTE_REF')
 
 
@@ -410,7 +425,7 @@ class VjerStep(Action):  # pylint: disable=too-many-instance-attributes
         return self.project.helm_repository
 
     def commit_files(self, message: str, branch: str, *files, file_updater: Optional[Callable] = None) -> None:
-        """Checkin files during to the source repository."""
+        """Checkin files to the source repository."""
         self.git_client.client.add_remote_ref(remote_ref := REMOTE_REF, self.git_client.ci_remote_ref, exists_ok=True)
         git('fetch', all=True, syscmd_args={'ignore_stderr': True})
         git('remote', 'update', remote_ref, prune=True, syscmd_args={'ignore_stderr': True})
