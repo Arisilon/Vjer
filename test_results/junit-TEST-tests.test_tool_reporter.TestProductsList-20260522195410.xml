@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.test_tool_reporter.TestProductsList-20260522195410" tests="2" file="tests/test_tool_reporter.py" time="0.001" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
-	<testcase classname="tests.test_tool_reporter.TestProductsList" name="test_products_have_required_fields" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="270">
-		<!--Test that each product has required fields.-->
-	</testcase>
-	<testcase classname="tests.test_tool_reporter.TestProductsList" name="test_products_list_not_empty" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_tool_reporter.py" line="266">
-		<!--Test that PRODUCTS list is not empty.-->
-	</testcase>
-</testsuite>

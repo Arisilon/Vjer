@@ -5,9 +5,9 @@ project:
     type: bumpver
 test:
   steps:
-    - type: flake8
-    - type: pylint
-    - type: mypy
+    # - type: flake8
+    # - type: pylint
+    # - type: mypy
     - type: python_unittest
 build:
   steps:

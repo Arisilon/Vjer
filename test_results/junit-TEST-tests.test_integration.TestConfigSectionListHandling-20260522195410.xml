@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.test_integration.TestConfigSectionListHandling-20260522195410" tests="2" file="tests/test_integration.py" time="0.005" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
-	<testcase classname="tests.test_integration.TestConfigSectionListHandling" name="test_config_dict_attribute_expansion" time="0.004" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="152">
-		<!--Test that ConfigSection expands dict attributes.-->
-	</testcase>
-	<testcase classname="tests.test_integration.TestConfigSectionListHandling" name="test_config_list_attribute_expansion" time="0.000" timestamp="2026-05-22T19:54:10" file="tests\test_integration.py" line="138">
-		<!--Test that ConfigSection expands list attributes.-->
-	</testcase>
-</testsuite>

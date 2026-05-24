@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.test_vjer_step.TestVjerStepDocker-20260522195410" tests="1" file="tests/test_vjer_step.py" time="0.001" timestamp="2026-05-22T19:54:10" failures="0" errors="0" skipped="0">
-	<testcase classname="tests.test_vjer_step.TestVjerStepDocker" name="test_docker_init" time="0.001" timestamp="2026-05-22T19:54:10" file="tests\test_vjer_step.py" line="267">
-		<!--Test _docker_init method.-->
-	</testcase>
-</testsuite>

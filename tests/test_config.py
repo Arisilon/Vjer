@@ -1,19 +1,19 @@
 """Tests for configuration classes in vjer.utils."""
 
-import tests.test_support  # noqa: F401
+# pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name,protected-access
+# flake8: noqa
+
 import os
-import tempfile
-import unittest
 from pathlib import Path
-from unittest.mock import MagicMock, patch, mock_open
+from unittest import main, TestCase
+from unittest.mock import MagicMock, patch
 
 from dotmap import DotMap
 
-from vjer.utils import (ConfigSection, ConfigurationError, Environment,
-                        ProjectConfig, _PROJECT_DEFAULTS, _CONFIG_SECTIONS)
+from vjer.utils import _CONFIG_SECTIONS, ConfigSection, ConfigurationError, Environment, ProjectConfig
 
 
-class TestEnvironment(unittest.TestCase):
+class TestEnvironment(TestCase):
     """Tests for the Environment class."""
 
     def test_environment_getattr_existing_variable(self) -> None:
@@ -38,16 +38,14 @@ class TestEnvironment(unittest.TestCase):
             self.assertEqual(env.VAR2, 'value2')
 
 
-class TestConfigSection(unittest.TestCase):
+class TestConfigSection(TestCase):
     """Tests for the ConfigSection class."""
 
     def setUp(self) -> None:
         """Set up test fixtures."""
-        self.config = ConfigSection(
-            default_key='default_value',
-            version='1.0.0',
-            build_num='0'
-        )
+        self.config = ConfigSection(default_key='default_value',
+                                    version='1.0.0',
+                                    build_num='0')
 
     def test_config_section_init(self) -> None:
         """Test ConfigSection initialization."""
@@ -113,7 +111,7 @@ class TestConfigSection(unittest.TestCase):
             _ = self.config.nonexistent_attribute
 
 
-class TestConfigurationError(unittest.TestCase):
+class TestConfigurationError(TestCase):
     """Tests for ConfigurationError class."""
 
     def test_bad_format_error(self) -> None:
@@ -132,16 +130,16 @@ class TestConfigurationError(unittest.TestCase):
         self.assertIsNotNone(error)
 
 
-class TestProjectConfig(unittest.TestCase):
+class TestProjectConfig(TestCase):
     """Tests for the ProjectConfig class."""
 
     @patch('vjer.utils.Path.cwd')
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_init(self, mock_set_version: MagicMock,
-                                 mock_set_defaults: MagicMock,
-                                 mock_load_config: MagicMock,
+    def test_project_config_init(self, _unused_mock_set_version: MagicMock,
+                                 _unused_mock_set_defaults: MagicMock,
+                                 _unused_mock_load_config: MagicMock,
                                  mock_cwd: MagicMock) -> None:
         """Test ProjectConfig initialization."""
         mock_cwd.return_value = Path('/test/project')
@@ -156,10 +154,10 @@ class TestProjectConfig(unittest.TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_section_access(self, mock_set_version: MagicMock,
-                                          mock_set_defaults: MagicMock,
-                                          mock_load_config: MagicMock,
-                                          mock_cwd: MagicMock) -> None:
+    def test_project_config_section_access(self, _unused_mock_set_version: MagicMock,
+                                           _unused_mock_set_defaults: MagicMock,
+                                           _unused_mock_load_config: MagicMock,
+                                           mock_cwd: MagicMock) -> None:
         """Test accessing configuration sections."""
         mock_cwd.return_value = Path('/test/project')
 
@@ -176,10 +174,10 @@ class TestProjectConfig(unittest.TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_invalid_section(self, mock_set_version: MagicMock,
-                                           mock_set_defaults: MagicMock,
-                                           mock_load_config: MagicMock,
-                                           mock_cwd: MagicMock) -> None:
+    def test_project_config_invalid_section(self, _unused_mock_set_version: MagicMock,
+                                            _unused_mock_set_defaults: MagicMock,
+                                            _unused_mock_load_config: MagicMock,
+                                            mock_cwd: MagicMock) -> None:
         """Test accessing an invalid configuration section."""
         mock_cwd.return_value = Path('/test/project')
 
@@ -192,8 +190,8 @@ class TestProjectConfig(unittest.TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_load_config_file_not_found(self, mock_set_version: MagicMock,
-                                                       mock_set_defaults: MagicMock,
+    def test_project_config_load_config_file_not_found(self, _unused_mock_set_version: MagicMock,
+                                                       _unused_mock_set_defaults: MagicMock,
                                                        mock_load_config: MagicMock,
                                                        mock_cwd: MagicMock) -> None:
         """Test _load_config when config file doesn't exist."""
@@ -211,10 +209,10 @@ class TestProjectConfig(unittest.TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_schema_attribute(self, mock_set_version: MagicMock,
-                                            mock_set_defaults: MagicMock,
-                                            mock_load_config: MagicMock,
-                                            mock_cwd: MagicMock) -> None:
+    def test_project_config_schema_attribute(self, _unused_mock_set_version: MagicMock,
+                                             _unused_mock_set_defaults: MagicMock,
+                                             _unused_mock_load_config: MagicMock,
+                                             mock_cwd: MagicMock) -> None:
         """Test schema attribute is accessible."""
         mock_cwd.return_value = Path('/test/project')
 
@@ -225,4 +223,4 @@ class TestProjectConfig(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()

@@ -66,7 +66,7 @@ class TestStep(VjerStep):
 
     def test_python_unittest(self) -> None:
         """Runs the Python unittest module framework."""
-        XMLTestRunner(output=str(self.project.test_results_dir), failfast=True, verbosity=2).run(defaultTestLoader.discover(self.project.project_root))
+        XMLTestRunner(output=str(self.project.test_results_dir), failfast=False, verbosity=2).run(defaultTestLoader.discover(self.project.project_root))
         for junit_results in self.project.test_results_dir.iterdir():
             test_suite = JUnitXml.fromfile(str(junit_results))
             if test_suite.errors or test_suite.failures:
