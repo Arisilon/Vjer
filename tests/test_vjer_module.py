@@ -1,17 +1,18 @@
 """Tests for vjer module metadata and version."""
 
-import unittest
+# pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name
+# flake8: noqa
+
+from unittest import TestCase, main
 
 import vjer
-from vjer import (
-    __title__, __summary__, __uri__,
-    __version__, __build_name__, __build_date__,
-    __author__, __email__,
-    __license__, __copyright__, __all__
-)
+from vjer import (__title__, __summary__, __uri__,
+                  __version__, __build_name__, __build_date__,
+                  __author__, __email__,
+                  __license__, __copyright__, __all__)
 
 
-class TestVjerModule(unittest.TestCase):
+class TestVjerModule(TestCase):
     """Tests for vjer module metadata."""
 
     def test_module_title(self) -> None:
@@ -67,12 +68,10 @@ class TestVjerModule(unittest.TestCase):
 
     def test_module_all_exports(self) -> None:
         """Test __all__ contains expected exports."""
-        expected_exports = {
-            '__title__', '__summary__', '__uri__',
-            '__version__', '__build_name__', '__build_date__',
-            '__author__', '__email__',
-            '__license__', '__copyright__'
-        }
+        expected_exports = {'__title__', '__summary__', '__uri__',
+                            '__version__', '__build_name__', '__build_date__',
+                            '__author__', '__email__',
+                            '__license__', '__copyright__'}
         self.assertEqual(set(__all__), expected_exports)
 
     def test_module_can_be_imported(self) -> None:
@@ -81,39 +80,33 @@ class TestVjerModule(unittest.TestCase):
 
     def test_module_attributes_are_strings(self) -> None:
         """Test that all module attributes are strings."""
-        attributes = [
-            __title__, __summary__, __uri__,
-            __version__, __build_name__, __build_date__,
-            __author__, __email__,
-            __license__, __copyright__
-        ]
+        attributes = [__title__, __summary__, __uri__,
+                      __version__, __build_name__, __build_date__,
+                      __author__, __email__,
+                      __license__, __copyright__]
         for attr in attributes:
-            self.assertIsInstance(attr, str,
-                                f'Expected string, got {type(attr).__name__}')
+            self.assertIsInstance(attr, str,f'Expected string, got {type(attr).__name__}')
 
     def test_module_non_empty_strings(self) -> None:
         """Test that all module attributes are non-empty strings."""
-        attributes = {
-            '__title__': __title__,
-            '__summary__': __summary__,
-            '__uri__': __uri__,
-            '__version__': __version__,
-            '__author__': __author__,
-            '__email__': __email__,
-            '__license__': __license__,
-            '__copyright__': __copyright__
-        }
+        attributes = {'__title__': __title__,
+                      '__summary__': __summary__,
+                      '__uri__': __uri__,
+                      '__version__': __version__,
+                      '__author__': __author__,
+                      '__email__': __email__,
+                      '__license__': __license__,
+                      '__copyright__': __copyright__}
         for attr_name, attr_value in attributes.items():
-            self.assertTrue(len(attr_value) > 0,
-                          f'{attr_name} should not be empty')
+            self.assertTrue(len(attr_value) > 0, f'{attr_name} should not be empty')
 
 
-class TestVjerModuleVersion(unittest.TestCase):
+class TestVjerModuleVersion(TestCase):
     """Tests for vjer module version format."""
 
     def test_version_major_component(self) -> None:
         """Test version has major component."""
-        major = __version__.split('.')[0]
+        major = __version__.split('.', maxsplit=1)[0]
         self.assertTrue(major.isdigit())
 
     def test_version_minor_component(self) -> None:
@@ -135,4 +128,4 @@ class TestVjerModuleVersion(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()

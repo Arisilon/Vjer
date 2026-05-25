@@ -1,17 +1,18 @@
 """Tests for VjerStep class."""
 
-import tests.test_support  # noqa: F401
-import os
-import unittest
+# pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name,protected-access,arguments-differ
+# flake8: noqa
+
 from pathlib import Path
-from unittest.mock import MagicMock, patch, PropertyMock, call
+from unittest import TestCase, main
+from unittest.mock import MagicMock, patch
 
 from dotmap import DotMap
 
-from vjer.utils import VjerStep, GitClient, ProjectConfig
+from vjer.utils import VjerStep
 
 
-class TestVjerStep(unittest.TestCase):
+class TestVjerStep(TestCase):
     """Tests for the VjerStep class."""
 
     @patch('vjer.utils.ProjectConfig')
@@ -30,8 +31,7 @@ class TestVjerStep(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
-            version_service=DotMap(type='vjer')
-        )
+            version_service=DotMap(type='vjer'))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -54,8 +54,7 @@ class TestVjerStep(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
-            version_service=DotMap(type='vjer')
-        )
+            version_service=DotMap(type='vjer'))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -76,8 +75,7 @@ class TestVjerStep(unittest.TestCase):
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_vjer_step_getattr_from_project(self, mock_git_client: MagicMock,
-                                           mock_config: MagicMock) -> None:
+    def test_vjer_step_getattr_from_project(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test __getattr__ retrieves attributes from project."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = DotMap(
@@ -87,8 +85,7 @@ class TestVjerStep(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
-            version_service=DotMap(type='vjer')
-        )
+            version_service=DotMap(type='vjer'))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -101,8 +98,7 @@ class TestVjerStep(unittest.TestCase):
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_vjer_step_getattr_from_step_info(self, mock_git_client: MagicMock,
-                                             mock_config: MagicMock) -> None:
+    def test_vjer_step_getattr_from_step_info(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test __getattr__ prefers step_info over project."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = DotMap(
@@ -112,8 +108,7 @@ class TestVjerStep(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
-            version_service=DotMap(type='vjer')
-        )
+            version_service=DotMap(type='vjer'))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -126,8 +121,7 @@ class TestVjerStep(unittest.TestCase):
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_vjer_step_getattr_invalid_attribute(self, mock_git_client: MagicMock,
-                                                mock_config: MagicMock) -> None:
+    def test_vjer_step_getattr_invalid_attribute(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test __getattr__ raises for invalid attributes."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = DotMap(
@@ -137,8 +131,7 @@ class TestVjerStep(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
-            version_service=DotMap(type='vjer')
-        )
+            version_service=DotMap(type='vjer'))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -151,16 +144,14 @@ class TestVjerStep(unittest.TestCase):
             'test_results': 'test_results',
             'artifacts': 'artifacts',
             'container_registry': DotMap(type='local', auth=tuple(), name=''),
-            'version_service': DotMap(type='vjer')
-        })()
+            'version_service': DotMap(type='vjer')})()
 
         with self.assertRaises(AttributeError):
             _ = step.nonexistent_attribute
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_vjer_step_helm_chart_root_property(self, mock_git_client: MagicMock,
-                                               mock_config: MagicMock) -> None:
+    def test_vjer_step_helm_chart_root_property(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test helm_chart_root property."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = DotMap(
@@ -171,8 +162,7 @@ class TestVjerStep(unittest.TestCase):
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
             version_service=DotMap(type='vjer'),
-            chart_root='helm-chart'
-        )
+            chart_root='helm-chart')
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -185,8 +175,7 @@ class TestVjerStep(unittest.TestCase):
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_vjer_step_pkg_name_property(self, mock_git_client: MagicMock,
-                                        mock_config: MagicMock) -> None:
+    def test_vjer_step_pkg_name_property(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test pkg_name property."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = DotMap(
@@ -196,8 +185,7 @@ class TestVjerStep(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
-            version_service=DotMap(type='vjer')
-        )
+            version_service=DotMap(type='vjer'))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -211,8 +199,7 @@ class TestVjerStep(unittest.TestCase):
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_vjer_step_helm_args_property_empty(self, mock_git_client: MagicMock,
-                                               mock_config: MagicMock) -> None:
+    def test_vjer_step_helm_args_property_empty(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test helm_args property when no values."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = DotMap(
@@ -222,8 +209,7 @@ class TestVjerStep(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
-            version_service=DotMap(type='vjer')
-        )
+            version_service=DotMap(type='vjer'))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -236,8 +222,7 @@ class TestVjerStep(unittest.TestCase):
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_vjer_step_helm_repo_property(self, mock_git_client: MagicMock,
-                                         mock_config: MagicMock) -> None:
+    def test_vjer_step_helm_repo_property(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test helm_repo property."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = DotMap(
@@ -248,8 +233,7 @@ class TestVjerStep(unittest.TestCase):
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
             version_service=DotMap(type='vjer'),
-            helm_repository=DotMap(type='oci', url='', name='')
-        )
+            helm_repository=DotMap(type='oci', url='', name=''))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -261,14 +245,13 @@ class TestVjerStep(unittest.TestCase):
         self.assertIsNotNone(helm_repo)
 
 
-class TestVjerStepDocker(unittest.TestCase):
+class TestVjerStepDocker(TestCase):
     """Tests for VjerStep Docker-related methods."""
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
     @patch('vjer.utils.Cloud')
-    def test_docker_init(self, mock_cloud: MagicMock, mock_git_client: MagicMock,
-                         mock_config: MagicMock) -> None:
+    def test_docker_init(self, mock_cloud: MagicMock, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test _docker_init method."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = DotMap(
@@ -278,8 +261,7 @@ class TestVjerStepDocker(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             container_registry=DotMap(type='local', auth=tuple(), name=''),
-            version_service=DotMap(type='vjer')
-        )
+            version_service=DotMap(type='vjer'))
         mock_config_instance.build = DotMap(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = DotMap()
         mock_config.return_value = mock_config_instance
@@ -301,4 +283,4 @@ class TestVjerStepDocker(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
