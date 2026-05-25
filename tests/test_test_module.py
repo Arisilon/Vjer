@@ -1,11 +1,11 @@
 """Tests for vjer.test module."""
 
-import tests.test_support  # noqa: F401
-import os
+# pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name
+# flake8: noqa
+
 import unittest
 from pathlib import Path
-from unittest.mock import MagicMock, patch, call, PropertyMock
-from tempfile import TemporaryDirectory
+from unittest.mock import MagicMock, patch, PropertyMock
 
 from vjer.test import TestStep
 
@@ -16,9 +16,8 @@ class TestTestStep(unittest.TestCase):
     @patch('vjer.test.VjerAction')
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_test_step_init(self, mock_git_client: MagicMock,
-                           mock_config: MagicMock,
-                           mock_vjer_action: MagicMock) -> None:
+    def test_test_step_init(self, mock_git_client: MagicMock, mock_config: MagicMock,
+                            _unused_mock_vjer_action: MagicMock) -> None:
         """Test TestStep initialization."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = MagicMock(
@@ -29,8 +28,7 @@ class TestTestStep(unittest.TestCase):
             test_results_dir=Path('/test/project/test_results'),
             artifacts='artifacts',
             container_registry=MagicMock(type='local', auth=tuple(), name=''),
-            version_service=MagicMock(type='vjer')
-        )
+            version_service=MagicMock(type='vjer'))
         mock_config_instance.build = MagicMock(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = MagicMock()
         mock_config.return_value = mock_config_instance
@@ -52,10 +50,8 @@ class TestTestStepPre(unittest.TestCase):
     @patch('vjer.test.Path')
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_test_step_pre_removes_old_test_results(self, mock_git_client: MagicMock,
-                                                    mock_config: MagicMock,
-                                                    mock_path_class: MagicMock,
-                                                    mock_rmpath: MagicMock) -> None:
+    def test_test_step_pre_removes_old_test_results(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock,
+                                                    _unused_mock_path_class: MagicMock, _unused_mock_rmpath: MagicMock) -> None:
         """Test that pre() removes old test results directory."""
         mock_config_instance = MagicMock()
         test_results_path = Path('/test/project/test_results')
@@ -66,8 +62,7 @@ class TestTestStepPre(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             version_service=MagicMock(type='vjer'),
-            container_registry=MagicMock(type='local', auth=tuple(), name='')
-        )
+            container_registry=MagicMock(type='local', auth=tuple(), name=''))
         mock_config_instance.build = MagicMock(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = MagicMock()
         mock_config.return_value = mock_config_instance
@@ -83,8 +78,7 @@ class TestTestStepPre(unittest.TestCase):
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_test_step_pre_calls_parent_pre(self, mock_git_client: MagicMock,
-                                           mock_config: MagicMock) -> None:
+    def test_test_step_pre_calls_parent_pre(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock) -> None:
         """Test that pre() calls parent class pre()."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = MagicMock(
@@ -94,8 +88,7 @@ class TestTestStepPre(unittest.TestCase):
             test_results='test_results',
             artifacts='artifacts',
             version_service=MagicMock(type='vjer'),
-            container_registry=MagicMock(type='local', auth=tuple(), name='')
-        )
+            container_registry=MagicMock(type='local', auth=tuple(), name=''))
         mock_config_instance.build = MagicMock(build_num='0', build_version='1.0.0-0')
         mock_config_instance.release = MagicMock()
         mock_config.return_value = mock_config_instance
@@ -114,9 +107,7 @@ class TestTestStepTestMethods(unittest.TestCase):
     @patch('vjer.test.SysCmdRunner')
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_test_flake8(self, mock_git_client: MagicMock,
-                         mock_config: MagicMock,
-                         mock_syscmd_runner: MagicMock) -> None:
+    def test_test_flake8(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock, _unused_mock_syscmd_runner: MagicMock) -> None:
         """Test test_flake8 method calls SysCmdRunner."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = MagicMock(
@@ -124,8 +115,7 @@ class TestTestStepTestMethods(unittest.TestCase):
             name='test-project',
             test_results_dir=Path('/test/project/test_results'),
             version_service=MagicMock(type='vjer'),
-            container_registry=MagicMock(type='local', auth=tuple(), name='')
-        )
+            container_registry=MagicMock(type='local', auth=tuple(), name=''))
         mock_config_instance.build = MagicMock(build_num='0')
         mock_config_instance.release = MagicMock()
         mock_config.return_value = mock_config_instance
@@ -140,9 +130,7 @@ class TestTestStepTestMethods(unittest.TestCase):
     @patch('vjer.test.SysCmdRunner')
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_test_mypy(self, mock_git_client: MagicMock,
-                       mock_config: MagicMock,
-                       mock_syscmd_runner: MagicMock) -> None:
+    def test_test_mypy(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock, _unused_mock_syscmd_runner: MagicMock) -> None:
         """Test test_mypy method calls SysCmdRunner."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = MagicMock(
@@ -150,8 +138,7 @@ class TestTestStepTestMethods(unittest.TestCase):
             name='test-project',
             test_results_dir=Path('/test/project/test_results'),
             version_service=MagicMock(type='vjer'),
-            container_registry=MagicMock(type='local', auth=tuple(), name='')
-        )
+            container_registry=MagicMock(type='local', auth=tuple(), name=''))
         mock_config_instance.build = MagicMock(build_num='0')
         mock_config_instance.release = MagicMock()
         mock_config.return_value = mock_config_instance
@@ -166,9 +153,7 @@ class TestTestStepTestMethods(unittest.TestCase):
     @patch('vjer.test.SysCmdRunner')
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_test_pylint(self, mock_git_client: MagicMock,
-                         mock_config: MagicMock,
-                         mock_syscmd_runner: MagicMock) -> None:
+    def test_test_pylint(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock, _unused_mock_syscmd_runner: MagicMock) -> None:
         """Test test_pylint method calls SysCmdRunner."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = MagicMock(
@@ -176,8 +161,7 @@ class TestTestStepTestMethods(unittest.TestCase):
             name='test-project',
             test_results_dir=Path('/test/project/test_results'),
             version_service=MagicMock(type='vjer'),
-            container_registry=MagicMock(type='local', auth=tuple(), name='')
-        )
+            container_registry=MagicMock(type='local', auth=tuple(), name=''))
         mock_config_instance.build = MagicMock(build_num='0')
         mock_config_instance.release = MagicMock()
         mock_config.return_value = mock_config_instance
@@ -197,10 +181,8 @@ class TestTestStepHelm(unittest.TestCase):
     @patch('vjer.test.Path')
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_test_helm(self, mock_git_client: MagicMock,
-                       mock_config: MagicMock,
-                       mock_path: MagicMock,
-                       mock_helm: MagicMock) -> None:
+    def test_test_helm(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock,
+                       _unused_mock_path: MagicMock, _unused_mock_helm: MagicMock) -> None:
         """Test test_helm method."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = MagicMock(
@@ -209,8 +191,7 @@ class TestTestStepHelm(unittest.TestCase):
             chart_root='helm-chart',
             test_results_dir=Path('/test/project/test_results'),
             version_service=MagicMock(type='vjer'),
-            container_registry=MagicMock(type='local', auth=tuple(), name='')
-        )
+            container_registry=MagicMock(type='local', auth=tuple(), name=''))
         mock_config_instance.build = MagicMock(build_num='0')
         mock_config_instance.release = MagicMock()
         mock_config.return_value = mock_config_instance
@@ -233,9 +214,7 @@ class TestTestStepDocker(unittest.TestCase):
     @patch('vjer.test.Path')
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_test_docker(self, mock_git_client: MagicMock,
-                        mock_config: MagicMock,
-                        mock_path: MagicMock) -> None:
+    def test_test_docker(self, _unused_mock_git_client: MagicMock, mock_config: MagicMock, _unused_mock_path: MagicMock) -> None:
         """Test test_docker method."""
         mock_config_instance = MagicMock()
         mock_config_instance.project = MagicMock(
@@ -243,8 +222,7 @@ class TestTestStepDocker(unittest.TestCase):
             name='test-project',
             test_results_dir=Path('/test/project/test_results'),
             version_service=MagicMock(type='vjer'),
-            container_registry=MagicMock(type='local', auth=tuple(), name='')
-        )
+            container_registry=MagicMock(type='local', auth=tuple(), name=''))
         mock_config_instance.build = MagicMock(build_num='0')
         mock_config_instance.release = MagicMock()
         mock_config.return_value = mock_config_instance
@@ -260,3 +238,5 @@ class TestTestStepDocker(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+# cSpell:ignore syscmd
