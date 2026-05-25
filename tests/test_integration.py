@@ -1,23 +1,23 @@
 """Integration and utility tests for vjer module."""
 
-import tests.test_support  # noqa: F401
+# pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name,import-outside-toplevel
+# flake8: noqa
+
 import os
-import unittest
 from pathlib import Path
+from unittest import TestCase, main
 from unittest.mock import MagicMock, patch
 
 from dotmap import DotMap
 from batcave.lang import BatCaveException
 
-from vjer.utils import (
-    ConfigurationError, StepError, _CONFIG_SECTIONS, _PROJECT_DEFAULTS,
-    REMOTE_REF, BAD_TAG_CHARACTERS, REPLACER_HOLDER,
-    PROJECT_CFG_FILE, TOOL_REPORT, HELM_CHART_FILE,
-    DEFAULT_VERSION_FILES, VJER_ENV
-)
+from vjer.utils import (ConfigurationError, StepError, _CONFIG_SECTIONS, _PROJECT_DEFAULTS,
+                        REMOTE_REF, BAD_TAG_CHARACTERS, REPLACER_HOLDER,
+                        PROJECT_CFG_FILE, TOOL_REPORT, HELM_CHART_FILE,
+                        DEFAULT_VERSION_FILES, VJER_ENV)
 
 
-class TestConfigurationConstants(unittest.TestCase):
+class TestConfigurationConstants(TestCase):
     """Tests for configuration constants."""
 
     def test_config_sections(self) -> None:
@@ -76,7 +76,7 @@ class TestConfigurationConstants(unittest.TestCase):
         self.assertGreater(len(VJER_ENV), 0)
 
 
-class TestStepError(unittest.TestCase):
+class TestStepError(TestCase):
     """Tests for StepError exception."""
 
     def test_step_error_unknown_object(self) -> None:
@@ -90,7 +90,7 @@ class TestStepError(unittest.TestCase):
         self.assertTrue(issubclass(StepError, BatCaveException))
 
 
-class TestConfigurationErrorHierarchy(unittest.TestCase):
+class TestConfigurationErrorHierarchy(TestCase):
     """Tests for ConfigurationError exception hierarchy."""
 
     def test_configuration_error_is_exception(self) -> None:
@@ -105,7 +105,7 @@ class TestConfigurationErrorHierarchy(unittest.TestCase):
         self.assertIsNotNone(ConfigurationError.INVALID_SCHEMA)
 
 
-class TestEnvironmentConstants(unittest.TestCase):
+class TestEnvironmentConstants(TestCase):
     """Tests for environment-related constants."""
 
     def test_environment_variable_access(self) -> None:
@@ -132,40 +132,34 @@ class TestEnvironmentConstants(unittest.TestCase):
         self.assertTrue(PROJECT_CFG_FILE.endswith(('.yml', '.yaml')))
 
 
-class TestConfigSectionListHandling(unittest.TestCase):
+class TestConfigSectionListHandling(TestCase):
     """Tests for list handling in ConfigSection."""
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_config_list_attribute_expansion(self, mock_git_client: MagicMock,
-                                            mock_config: MagicMock) -> None:
+    def test_config_list_attribute_expansion(self, _unused_mock_git_client: MagicMock, _unused_mock_config: MagicMock) -> None:
         """Test that ConfigSection expands list attributes."""
         from vjer.utils import ConfigSection
-
         config = ConfigSection()
         config.update({'values_list': ['item1', 'item2', 'item3']})
-
         values_list = config.values_list
         self.assertIsInstance(values_list, list)
         self.assertEqual(len(values_list), 3)
 
     @patch('vjer.utils.ProjectConfig')
     @patch('vjer.utils.GitClient')
-    def test_config_dict_attribute_expansion(self, mock_git_client: MagicMock,
-                                            mock_config: MagicMock) -> None:
+    def test_config_dict_attribute_expansion(self, _unused_mock_git_client: MagicMock, _unused_mock_config: MagicMock) -> None:
         """Test that ConfigSection expands dict attributes."""
         from vjer.utils import ConfigSection
-
         config = ConfigSection()
         config.update({'settings': {'key1': 'value1', 'key2': 'value2'}})
-
         settings = config.settings
         self.assertIsInstance(settings, DotMap)
         self.assertEqual(settings.key1, 'value1')
         self.assertEqual(settings.key2, 'value2')
 
 
-class TestProjectDefaultValues(unittest.TestCase):
+class TestProjectDefaultValues(TestCase):
     """Tests for project default values."""
 
     def test_build_artifacts_default(self) -> None:
@@ -195,4 +189,4 @@ class TestProjectDefaultValues(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
