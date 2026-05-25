@@ -1,15 +1,16 @@
 """Tests for GitClient and other utility classes in vjer.utils."""
 
-import tests.test_support  # noqa: F401
+# pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name
+# flake8: noqa
+
 import os
-import unittest
-from pathlib import Path
-from unittest.mock import MagicMock, patch, PropertyMock
+from unittest import TestCase, main
+from unittest.mock import MagicMock, patch
 
 from vjer.utils import GitClient, git, helm, apt, apt_install, pip_install
 
 
-class TestGitClient(unittest.TestCase):
+class TestGitClient(TestCase):
     """Tests for the GitClient class."""
 
     def test_git_client_init_with_defaults(self) -> None:
@@ -99,7 +100,7 @@ class TestGitClient(unittest.TestCase):
                 self.assertIn('Environment variable not found', str(ctx.exception))
 
 
-class TestUtilityFunctions(unittest.TestCase):
+class TestUtilityFunctions(TestCase):
     """Tests for utility runner functions."""
 
     def test_git_runner_exists(self) -> None:
@@ -128,7 +129,7 @@ class TestUtilityFunctions(unittest.TestCase):
         self.assertTrue(callable(pip_install))
 
 
-class TestGitClientWithMockClient(unittest.TestCase):
+class TestGitClientWithMockClient(TestCase):
     """Tests for GitClient with mocked git client."""
 
     @patch('vjer.utils.Client')
@@ -137,13 +138,13 @@ class TestGitClientWithMockClient(unittest.TestCase):
         mock_client = MagicMock()
         mock_client_class.return_value = mock_client
 
-        with patch('vjer.utils.Path') as mock_path:
+        with patch('vjer.utils.Path'):
             mock_git_dir = MagicMock()
             mock_git_dir.exists.return_value = True
 
             # Test without triggering Path operations in __init__
             with patch.dict(os.environ, {'CI_COMMIT_REF_NAME': 'main'}, clear=True):
-                client = GitClient(client_root='/test/repo')
+                GitClient(client_root='/test/repo')
                 # The client should be created if .git directory exists
                 # (depends on implementation details)
 
@@ -155,7 +156,7 @@ class TestGitClientWithMockClient(unittest.TestCase):
         mock_client_class.return_value = mock_client
 
         with patch.dict(os.environ, {}, clear=True):
-            with patch('vjer.utils.Path') as mock_path:
+            with patch('vjer.utils.Path'):
                 mock_git_dir = MagicMock()
                 mock_git_dir.exists.return_value = True
 
@@ -167,4 +168,4 @@ class TestGitClientWithMockClient(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
