@@ -1,6 +1,6 @@
 """Tests for configuration classes in vjer.utils."""
 
-# pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name,protected-access
+# pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name,protected-access,import-outside-toplevel
 # flake8: noqa
 
 import os
@@ -225,6 +225,33 @@ class TestProjectConfig(TestCase):
 
             new_config = ProjectConfig()
             self.assertEqual(new_config.project.version, '2.0.0')
+
+    @patch('pathlib.Path.cwd')
+    def test_project_config_uses_vjer_cfg(self, mock_cwd: MagicMock) -> None:
+        """Test that ProjectConfig honors VJER_CFG environment variable."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir)
+            file_name = 'custom-vjer.yml'
+            config_file = path / file_name
+            config_file.write_text('schema: 3\n'
+                                   'project:\n'
+                                   '  name: env-app\n'
+                                   '  version: 4.5.6\n',
+                                   encoding='utf-8')
+
+            mock_cwd.return_value = path
+            with patch.dict(os.environ, {'VJER_CFG': file_name}, clear=False):
+                import importlib
+                import vjer.utils as utils_module
+                utils_module = importlib.reload(utils_module)
+                config = utils_module.ProjectConfig()
+                self.assertEqual(config.filename, config_file)
+                self.assertEqual(config.project.name, 'env-app')
+                self.assertEqual(config.project.version, '4.5.6')
+
+            import importlib
+            import vjer.utils as utils_module
+            importlib.reload(utils_module)
 
 
 if __name__ == '__main__':
