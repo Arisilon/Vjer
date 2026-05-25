@@ -4,8 +4,8 @@
 # flake8: noqa
 
 import os
-import tempfile
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest import main, TestCase
 from unittest.mock import MagicMock, patch
 
@@ -203,7 +203,7 @@ class TestProjectConfig(TestCase):
     @patch('vjer.utils.Path.cwd')
     def test_project_config_read_and_write(self, mock_cwd: MagicMock) -> None:
         """Test writing a config file and reading it back through ProjectConfig."""
-        with tempfile.TemporaryDirectory() as temp_dir:
+        with TemporaryDirectory() as temp_dir:
             path = Path(temp_dir)
             config_file = path / 'vjer.yml'
             config_file.write_text('schema: 3\n'
@@ -229,7 +229,7 @@ class TestProjectConfig(TestCase):
     @patch('pathlib.Path.cwd')
     def test_project_config_uses_vjer_cfg(self, mock_cwd: MagicMock) -> None:
         """Test that ProjectConfig honors VJER_CFG environment variable."""
-        with tempfile.TemporaryDirectory() as temp_dir:
+        with TemporaryDirectory() as temp_dir:
             path = Path(temp_dir)
             file_name = 'custom-vjer.yml'
             config_file = path / file_name

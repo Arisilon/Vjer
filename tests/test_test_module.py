@@ -3,14 +3,14 @@
 # pylint: disable=missing-class-docstring,missing-function-docstring,invalid-name
 # flake8: noqa
 
-import unittest
 from pathlib import Path
+from unittest import TestCase, main
 from unittest.mock import MagicMock, patch, PropertyMock
 
 from vjer.test import TestStep
 
 
-class TestTestStep(unittest.TestCase):
+class TestTestStep(TestCase):
     """Tests for the TestStep class."""
 
     @patch('vjer.test.VjerAction')
@@ -43,7 +43,7 @@ class TestTestStep(unittest.TestCase):
         self.assertIsNotNone(step.project)
 
 
-class TestTestStepPre(unittest.TestCase):
+class TestTestStepPre(TestCase):
     """Tests for TestStep.pre method."""
 
     @patch('vjer.test.rmpath')
@@ -101,7 +101,7 @@ class TestTestStepPre(unittest.TestCase):
             mock_parent_pre.assert_called_once()
 
 
-class TestTestStepTestMethods(unittest.TestCase):
+class TestTestStepTestMethods(TestCase):
     """Tests for TestStep test method runners."""
 
     @patch('vjer.test.SysCmdRunner')
@@ -174,7 +174,7 @@ class TestTestStepTestMethods(unittest.TestCase):
             mock_test_runner.assert_called_once_with('pylint')
 
 
-class TestTestStepHelm(unittest.TestCase):
+class TestTestStepHelm(TestCase):
     """Tests for TestStep helm test method."""
 
     @patch('vjer.test.helm')
@@ -208,7 +208,7 @@ class TestTestStepHelm(unittest.TestCase):
                                 step.test_helm()
 
 
-class TestTestStepDocker(unittest.TestCase):
+class TestTestStepDocker(TestCase):
     """Tests for TestStep docker test method."""
 
     @patch('vjer.test.Path')
@@ -237,6 +237,6 @@ class TestTestStepDocker(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
 
 # cSpell:ignore syscmd
