@@ -4,6 +4,7 @@
 # flake8: noqa
 
 import os
+import tempfile
 from pathlib import Path
 from unittest import main, TestCase
 from unittest.mock import MagicMock, patch
@@ -43,9 +44,7 @@ class TestConfigSection(TestCase):
 
     def setUp(self) -> None:
         """Set up test fixtures."""
-        self.config = ConfigSection(default_key='default_value',
-                                    version='1.0.0',
-                                    build_num='0')
+        self.config = ConfigSection(default_key='default_value', version='1.0.0', build_num='0')
 
     def test_config_section_init(self) -> None:
         """Test ConfigSection initialization."""
@@ -137,15 +136,11 @@ class TestProjectConfig(TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_init(self, _unused_mock_set_version: MagicMock,
-                                 _unused_mock_set_defaults: MagicMock,
-                                 _unused_mock_load_config: MagicMock,
-                                 mock_cwd: MagicMock) -> None:
+    def test_project_config_init(self, _unused_mock_set_version: MagicMock, _unused_mock_set_defaults: MagicMock,
+                                 _unused_mock_load_config: MagicMock, mock_cwd: MagicMock) -> None:
         """Test ProjectConfig initialization."""
         mock_cwd.return_value = Path('/test/project')
-
         config = ProjectConfig()
-
         self.assertIsNotNone(config._sections)
         self.assertEqual(len(config._sections), len(_CONFIG_SECTIONS))
         self.assertIsNotNone(config.project)
@@ -154,15 +149,11 @@ class TestProjectConfig(TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_section_access(self, _unused_mock_set_version: MagicMock,
-                                           _unused_mock_set_defaults: MagicMock,
-                                           _unused_mock_load_config: MagicMock,
-                                           mock_cwd: MagicMock) -> None:
+    def test_project_config_section_access(self, _unused_mock_set_version: MagicMock, _unused_mock_set_defaults: MagicMock,
+                                           _unused_mock_load_config: MagicMock, mock_cwd: MagicMock) -> None:
         """Test accessing configuration sections."""
         mock_cwd.return_value = Path('/test/project')
-
         config = ProjectConfig()
-
         # Test accessing valid sections
         self.assertIsNotNone(config.project)
         self.assertIsNotNone(config.test)
@@ -174,15 +165,11 @@ class TestProjectConfig(TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_invalid_section(self, _unused_mock_set_version: MagicMock,
-                                            _unused_mock_set_defaults: MagicMock,
-                                            _unused_mock_load_config: MagicMock,
-                                            mock_cwd: MagicMock) -> None:
+    def test_project_config_invalid_section(self, _unused_mock_set_version: MagicMock, _unused_mock_set_defaults: MagicMock,
+                                            _unused_mock_load_config: MagicMock, mock_cwd: MagicMock) -> None:
         """Test accessing an invalid configuration section."""
         mock_cwd.return_value = Path('/test/project')
-
         config = ProjectConfig()
-
         with self.assertRaises(AttributeError):
             _ = config.invalid_section
 
@@ -190,17 +177,13 @@ class TestProjectConfig(TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_load_config_file_not_found(self, _unused_mock_set_version: MagicMock,
-                                                       _unused_mock_set_defaults: MagicMock,
-                                                       mock_load_config: MagicMock,
-                                                       mock_cwd: MagicMock) -> None:
+    def test_project_config_load_config_file_not_found(self, _unused_mock_set_version: MagicMock, _unused_mock_set_defaults: MagicMock,
+                                                       mock_load_config: MagicMock, mock_cwd: MagicMock) -> None:
         """Test _load_config when config file doesn't exist."""
         mock_cwd.return_value = Path('/nonexistent/project')
-
         def raise_config_error(*args: tuple, **kwargs: dict) -> None:
             raise ConfigurationError(ConfigurationError.CONFIG_FILE_NOT_FOUND,
                                    file=Path('/nonexistent/project/vjer.yml'))
-
         mock_load_config.side_effect = raise_config_error
         with self.assertRaises(ConfigurationError):
             ProjectConfig()
@@ -209,17 +192,39 @@ class TestProjectConfig(TestCase):
     @patch('vjer.utils.ProjectConfig._load_config')
     @patch('vjer.utils.ProjectConfig._set_defaults')
     @patch('vjer.utils.ProjectConfig._set_version')
-    def test_project_config_schema_attribute(self, _unused_mock_set_version: MagicMock,
-                                             _unused_mock_set_defaults: MagicMock,
-                                             _unused_mock_load_config: MagicMock,
-                                             mock_cwd: MagicMock) -> None:
+    def test_project_config_schema_attribute(self, _unused_mock_set_version: MagicMock, _unused_mock_set_defaults: MagicMock,
+                                             _unused_mock_load_config: MagicMock, mock_cwd: MagicMock) -> None:
         """Test schema attribute is accessible."""
         mock_cwd.return_value = Path('/test/project')
-
         config = ProjectConfig()
         config.schema = 3
-
         self.assertEqual(config.schema, 3)
+
+    @patch('vjer.utils.Path.cwd')
+    def test_project_config_read_and_write(self, mock_cwd: MagicMock) -> None:
+        """Test writing a config file and reading it back through ProjectConfig."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir)
+            config_file = path / 'vjer.yml'
+            config_file.write_text('schema: 3\n'
+                                   'project:\n'
+                                   '  name: sample-app\n'
+                                   '  version: 1.2.3\n',
+                                   encoding='utf-8')
+
+            mock_cwd.return_value = path
+            config = ProjectConfig()
+            self.assertEqual(config.schema, 3)
+            self.assertEqual(config.project.name, 'sample-app')
+            self.assertEqual(config.project.version, '1.2.3')
+            self.assertEqual(config.filename, config_file)
+
+            config.project.version = '2.0.0'
+            config.write()
+            self.assertTrue(config_file.exists())
+
+            new_config = ProjectConfig()
+            self.assertEqual(new_config.project.version, '2.0.0')
 
 
 if __name__ == '__main__':
