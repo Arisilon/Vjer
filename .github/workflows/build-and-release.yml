@@ -25,18 +25,10 @@ permissions:
 
 jobs:
   ci-cd:
-    uses: arisilon/shared-actions/.github/workflows/python-cicd.yaml@released
+    uses: arisilon/shared-actions/.github/workflows/python-cicd.yaml@main
     with:
       install-test-action: "vjer test build release"
       skip-pypi-test: ${{ inputs.skip-pypi-test || false }}
+      update-changelog: true
       vjer-local: true
     secrets: inherit
-
-  update-change-log:
-    if: (github.actor != 'github-actions[bot]') && ((github.ref_name == 'main') || startsWith(github.ref_name, 'release/'))
-    runs-on: ubuntu-latest
-    steps:
-      - name: Update Changelog
-        uses: arisilon/shared-actions/.github/actions/update-changelog@released
-        with:
-          git-commit-token: ${{ secrets.RELEASE_TOKEN }}
