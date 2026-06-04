@@ -12,6 +12,7 @@ from batcave.fileutil import pack
 from batcave.lang import str_to_pythonval
 from batcave.sysutil import rmpath
 from docker.errors import BuildError as DockerBuildError
+from sphinx.ext.apidoc import main as sphinx_apidoc
 from build import ProjectBuilder
 
 # Import project modules
@@ -120,9 +121,14 @@ class BuildStep(VjerStep):
         ProjectBuilder(self.project.project_root).build('sdist', self.project.artifacts_dir)
         ProjectBuilder(self.project.project_root).build('wheel', self.project.artifacts_dir)
 
+    def build_sphinx(self) -> None:
+        """Run a Sphinx documentation build."""
+        sphinx_apidoc(['--output-dir', str(self.project.doc_dir), str(self.project.project_root / self.project.name)])
+        # make html
+
 
 def build() -> None:
     """This is the main entry point."""
     VjerAction('build', cast(VjerStep, BuildStep)).execute()
 
-# cSpell:ignore pythonval buildargs
+# cSpell:ignore pythonval buildargs apidoc

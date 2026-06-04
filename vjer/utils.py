@@ -41,6 +41,7 @@ _PROJECT_DEFAULTS = DotMap(build_artifacts='artifacts',
                            chart_root='helm-chart',
                            container_registry=DotMap(type='local', auth=tuple(), name=''),
                            dockerfile='Dockerfile',
+                           documentation='docs',
                            test_results='test_results',
                            version_service=DotMap(type='vjer'))
 _VALID_SCHEMAS = [3]
@@ -298,6 +299,7 @@ class ProjectConfig:
 
     def _set_defaults(self) -> None:
         self.project.update_defaults(DotMap(artifacts_dir=self.project.project_root / self.project.build_artifacts,
+                                            doc_dir=self.project.project_root / self.project.documentation,
                                             test_results_dir=self.project.project_root / self.project.test_results))
 
     def _set_version(self) -> None:
