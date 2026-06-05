@@ -10,8 +10,9 @@ from typing import cast, Optional
 # Import third-party modules
 from batcave.fileutil import pack
 from batcave.lang import str_to_pythonval
-from batcave.sysutil import rmpath
+from batcave.sysutil import pushd, rmpath
 from docker.errors import BuildError as DockerBuildError
+from sphinx.application import Sphinx
 from sphinx.ext.apidoc import main as sphinx_apidoc
 from build import ProjectBuilder
 
@@ -124,11 +125,15 @@ class BuildStep(VjerStep):
     def build_sphinx(self) -> None:
         """Run a Sphinx documentation build."""
         sphinx_apidoc(['--output-dir', str(self.project.doc_dir), str(self.project.project_root / self.project.name)])
-        # make html
+        pushd(self.project.doc_dir)
+        Sphinx(self.project.doc_dir, self.project.doc_dir,
+               self.project.artifacts_dir / 'docs/html', self.project.artifacts_dir / 'docs/doctrees', 'html',
+               confoverrides={'version': self.project.version, 'release': self.project.version},
+               status=None, warning=None, freshenv=True).build(force_all=False)
 
 
 def build() -> None:
     """This is the main entry point."""
     VjerAction('build', cast(VjerStep, BuildStep)).execute()
 
-# cSpell:ignore pythonval buildargs apidoc
+# cSpell:ignore pythonval buildargs apidoc syscmd confoverrides doctrees freshenv
