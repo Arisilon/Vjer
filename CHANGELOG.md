@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add ReadTheDocs documentation. (GitHub #46)
+- Add missing RTD config value.  (GitHub #46)
 
 ### Changed
 
