@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add ReadTheDocs documentation. (GitHub #46)
+
 ### Changed
 
 - Implement Sphinx doc build framework. (GitHub #45)
