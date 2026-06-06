@@ -10,7 +10,7 @@ from typing import cast, Optional
 # Import third-party modules
 from batcave.fileutil import pack
 from batcave.lang import str_to_pythonval
-from batcave.sysutil import pushd, rmpath
+from batcave.sysutil import rmpath
 from docker.errors import BuildError as DockerBuildError
 from sphinx.application import Sphinx
 from sphinx.ext.apidoc import main as sphinx_apidoc
@@ -124,8 +124,8 @@ class BuildStep(VjerStep):
 
     def build_sphinx(self) -> None:
         """Run a Sphinx documentation build."""
-        sphinx_apidoc(['--output-dir', str(self.project.doc_dir), str(self.project.project_root / self.project.name)])
-        pushd(self.project.doc_dir)
+        if self.step_info.doc_type == 'api':
+            sphinx_apidoc(['--output-dir', str(self.project.doc_dir), str(self.project.project_root / self.project.name)])
         Sphinx(self.project.doc_dir, self.project.doc_dir,
                self.project.artifacts_dir / 'docs/html', self.project.artifacts_dir / 'docs/doctrees', 'html',
                confoverrides={'version': self.project.version, 'release': self.project.version},

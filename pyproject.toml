@@ -45,6 +45,8 @@ dependencies = [
     "sphinxcontrib-jsmath",
     "sphinxcontrib-qthelp",
     "sphinxcontrib-serializinghtml",
+    "sphinxcontrib-programoutput",
+    "sphinx-argparse"
 ]
 
 [project.optional-dependencies]
@@ -117,4 +119,4 @@ push = true
 "vjer/__init__.py" = ["__version__ = '{pep440_version}'"]
 
 # cSpell:ignore buildapi pytagnum bumpver junitparser pyproject xmlrunner
-# cSpell:ignore sphinxcontrib applehelp devhelp htmlhelp jsmath qthelp serializinghtml
+# cSpell:ignore sphinxcontrib applehelp devhelp htmlhelp jsmath qthelp serializinghtml programoutput

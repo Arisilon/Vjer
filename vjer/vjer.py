@@ -13,6 +13,7 @@ from sys import exit as sys_exit, stderr, version as python_version
 from tomllib import load as load_toml
 
 # Import third-party modules
+from argparse import ArgumentParser
 from batcave.commander import Argument, Commander
 from batcave.fileutil import slurp
 from batcave.sysutil import CMDError, SysCmdRunner
@@ -25,6 +26,16 @@ from . import __title__, __version__, __build_name__, __build_date__
 from .utils import apt, apt_install, VJER_ENV, pip_install, ProjectConfig, ConfigurationError, PROJECT_CFG_FILE, VjerStep
 
 ACTIONS = ['test', 'build', 'deploy', 'rollback', 'pre_release', 'release', 'freeze']
+
+
+def get_parser() -> ArgumentParser:
+    """Return the underlying argparse parser used by the Vjer CLI."""
+    version = AppVersion(__title__, __version__, __build_date__, __build_name__)
+    return Commander(
+        'Vjer CI/CD Automation Tool',
+        [Argument('actions', choices=ACTIONS, nargs='+')],
+        version=version,
+    ).parser
 
 
 def main() -> None:
