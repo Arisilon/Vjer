@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Implement Sphinx doc build framework. (GitHub #45)
 - Finish Sphinx build action.  (GitHub #45)
+- Update the RTD config. (GitHub #46)
 
 ## [40.0.1] - 2026-05-31
 
