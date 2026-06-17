@@ -1,17 +1,16 @@
 Usage Guide
 ===========
 
-Vjer is a command-line tool installed as the `vjer` entry point.
+Vjer is a command line tool for automating CI/CD tasks.
 
 Getting started
 ---------------
 
-Install Vjer into a Python environment before building the docs locally:
+Install Vjer into a Python environment before using:
 
 .. code-block:: console
 
-   python -m pip install -U .
-   python -m pip install -r docs/requirements.txt
+   pip install vjer
 
 Once installed, run Vjer from your virtual environment:
 
@@ -22,15 +21,9 @@ Once installed, run Vjer from your virtual environment:
 Basic usage
 -----------
 
-The Vjer entry point is designed for action-driven automation:
+A Vjer action is run by invoking the CLI with the action name as a positional argument:
 
-- `vjer test`
-- `vjer build`
-- `vjer deploy`
-- `vjer rollback`
-- `vjer pre_release`
-- `vjer release`
-- `vjer freeze`
+- `vjer <action>`
 
 Learn more:
 

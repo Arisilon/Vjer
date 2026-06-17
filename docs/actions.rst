@@ -22,9 +22,7 @@ Use the `vjer` entry point followed by an action name:
 
 .. code-block:: console
 
-   vjer test
-   vjer build
-   vjer deploy
+   vjer <action>
 
 The `build` action may create artifacts and documentation as defined in your project config.
 The `release` and `pre_release` actions are typically configured for publishing and tagging workflows.
