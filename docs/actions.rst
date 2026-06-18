@@ -11,9 +11,9 @@ Supported actions
 - `build` — run build steps from the `build` section.
 - `deploy` — run deploy steps from the `deploy` section.
 - `rollback` — run rollback steps from the `rollback` section.
-- `pre_release` — run release preparation steps from the `release` section.
-- `release` — run release steps from the `release` section.
-- `freeze` — run project freeze or locking steps.
+- `pre_release` — run release preparation steps using the `release` section.
+- `release` — run release steps using the `release` section.
+- `freeze` — create a frozen requirements file from the root `requirements.txt`.
 
 Running actions
 ---------------
@@ -24,14 +24,24 @@ Use the `vjer` entry point followed by an action name:
 
    vjer <action>
 
-The `build` action may create artifacts and documentation as defined in your project config.
-The `release` and `pre_release` actions are typically configured for publishing and tagging workflows.
+The `build` action creates artifacts and documentation according to the `build` section.
+The `release` and `pre_release` actions both use the `release` section. `pre_release`
+commonly prepares pre-release artifacts and version metadata, while `release` performs the
+final publish and tag actions.
+
+Freeze action
+-------------
+
+The `freeze` action is not driven by `vjer.yml`. It reads the root `requirements.txt`
+file, builds a temporary virtual environment, installs the requirements, and writes a frozen
+requirements file named `requirements-frozen.txt` or `requirements-frozen-<suffix>.txt`.
 
 Action configuration
 --------------------
 
 Action behavior is driven by the matching section in `vjer.yml`.
-For example, `vjer build` runs the steps defined under the `build` section, and `vjer test` runs the steps defined under the `test` section.
+For example, `vjer build` runs the steps defined under `build.steps`, and `vjer test`
+runs the steps defined under `test.steps`.
 
 Example
 -------
@@ -49,3 +59,11 @@ Example
      steps:
        - type: sphinx
          doc_type: cli
+
+   release:
+     steps:
+       - type: pypi
+         test_pypi: true
+         username: __token__
+         password: "{var:PYPI_TOKEN}"
+       - type: increment_release
