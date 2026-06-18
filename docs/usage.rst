@@ -12,20 +12,13 @@ Install Vjer into a Python environment before using it:
 
    pip install vjer
 
-Activate your virtual environment before running Vjer:
-
-.. code-block:: console
-
-   source .venv/bin/activate    # Linux/macOS
-   .venv\Scripts\activate     # Windows
-
 Run Vjer from the project root:
 
 .. code-block:: console
 
    vjer <action>
 
-You may also run Vjer directly from source:
+You may also run the Vjer module directly:
 
 .. code-block:: console
 
@@ -72,7 +65,6 @@ behavior.
 
 - `VJER_CFG`
 - `VJER_ENV`
-- `VIRTUAL_ENV`
 - `VJER_PKG_INSTALLS`
 - `VJER_PIP_INSTALLS`
 - `VJER_PIP_INSTALL_FILE`
@@ -81,8 +73,8 @@ behavior.
 - `VJER_BUILD_NUM`
 
 For CI git integration, Vjer also reads standard provider variables such as
-`CI_COMMIT_REF_NAME`, `CI_COMMIT_BRANCH`, `CI_REMOTE_REF`, `CI_REPOSITORY_URL`,
-`GITHUB_REF`, `GITHUB_REPOSITORY`, and `GITHUB_SERVER_URL`.
+`VIRTUAL_ENV`, `CI_COMMIT_REF_NAME`, `CI_COMMIT_BRANCH`, `CI_REMOTE_REF`,
+`CI_REPOSITORY_URL`, `GITHUB_REF`, `GITHUB_REPOSITORY`, and `GITHUB_SERVER_URL`.
 
 Next steps
 ----------

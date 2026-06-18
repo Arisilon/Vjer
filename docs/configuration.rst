@@ -98,10 +98,12 @@ Fields:
   - The explicit project version used when `version_service.type` is `vjer`.
 - `version_service`
   - Controls how the version is determined.
-  - `type: bumpver` reads the current version from bumpver configuration.
-  - `type: environment` reads the version from an environment variable specified by `variable`.
-  - `type: vjer` uses Vjer's internal versioning behavior and will use `project.version` if set.
-  - `variable` is used only when `type: environment`.
+  - Supported `type` values:
+    - `bumpver` — read the current version from bumpver configuration.
+    - `environment` — read the version from an environment variable specified by `variable`.
+    - `vjer` — use Vjer's internal versioning behavior and rely on `project.version` when set.
+  - `variable`
+    - The environment variable name used only when `version_service.type` is `environment`.
 - `environment`
   - A mapping of environment variables to set before action execution.
 - `artifacts_dir`

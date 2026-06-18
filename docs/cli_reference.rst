@@ -1,26 +1,6 @@
 CLI Reference
 =============
 
-Top-level command
------------------
-
-.. programoutput:: python -m vjer --help
-   :caption: Vjer top-level help
-   :force:
-
-Supported actions
------------------
-
-Vjer accepts a single action argument and runs the matching configured phase.
-
-- `test`
-- `build`
-- `deploy`
-- `rollback`
-- `pre_release`
-- `release`
-- `freeze`
-
 Usage
 -----
 
@@ -30,7 +10,7 @@ Run a Vjer action from the project root:
 
    vjer <action>
 
-From source tree without an installed console script:
+From the module without an installed console script:
 
 .. code-block:: console
 
@@ -68,7 +48,7 @@ Vjer supports a small set of runtime environment variables that modify CLI behav
   - Default: `true` in non-local environments and `false` in `VJER_ENV=local`.
 - `VJER_BUILD_NUM`
   - Build number used to form build metadata and non-bumpver image tags.
-  - Default: `0`.
+  - Default: depends on the version provider.
 
 CI environment variables used by Git operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
