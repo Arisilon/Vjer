@@ -37,16 +37,17 @@ dependencies = [
     "pylint",
     "twine",
     "unittest-xml-reporting",
-    "Sphinx",
-    "sphinx-rtd-theme",
-    "sphinxcontrib-applehelp",
-    "sphinxcontrib-devhelp",
-    "sphinxcontrib-htmlhelp",
-    "sphinxcontrib-jsmath",
-    "sphinxcontrib-qthelp",
-    "sphinxcontrib-serializinghtml",
-    "sphinxcontrib-programoutput",
-    "sphinx-argparse"
+    "Sphinx>=9.1,<10",
+    "sphinx-rtd-theme>=3.1",
+    "sphinxcontrib-applehelp>=2.0",
+    "sphinx-argparse>=0.5",
+    "sphinxcontrib-devhelp>=2.0",
+    "sphinxcontrib-htmlhelp>=2.1",
+    "sphinxcontrib-jquery>=4.1",
+    "sphinxcontrib-jsmath>=1.0",
+    "sphinxcontrib-qthelp>=2.0",
+    "sphinxcontrib-serializinghtml>=2.0",
+    "sphinxcontrib-programoutput>=0.19",
 ]
 
 [project.optional-dependencies]
@@ -119,4 +120,4 @@ push = true
 "vjer/__init__.py" = ["__version__ = '{pep440_version}'"]
 
 # cSpell:ignore buildapi pytagnum bumpver junitparser pyproject xmlrunner
-# cSpell:ignore sphinxcontrib applehelp devhelp htmlhelp jsmath qthelp serializinghtml programoutput
+# cSpell:ignore sphinxcontrib applehelp devhelp htmlhelp jsmath qthelp serializinghtml programoutput jquery
