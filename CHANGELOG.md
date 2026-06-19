@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Finish Sphinx build action.  (GitHub #45)
 - Update the RTD config. (GitHub #46)
 - Fix Sphinx requirements.
+- Only pass Python build artifacts to PyPi.
 
 ## [40.0.1] - 2026-05-31
 
