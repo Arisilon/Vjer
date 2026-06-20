@@ -1,14 +1,10 @@
-# Vjer Python Module
+# Vjer Python Tool
 
 A command line tool for automating CI/CD tasks.
 
 ## Developing
 
-Development is best accomplished using virtualenv or virtualenv-wrapper where a virtual environment can be generated:
-
-    UNIX: util/new-env.sh
-    Windows: util\New-Env.ps1
-
+Development is best accomplished using virtualenv or virtualenv-wrapper.
 To update the current development environment
 
     UNIX: util/update-env.sh
@@ -28,15 +24,16 @@ The build can be run with
 
 ## Publishing a Release
 
-This is the procedure for releasing Vjer
+This is the procedure for releasing BatCave
 
 1. Validate that all issues are "Ready for Release".
+1. Update CHANGELOG.md.
 1. Run the Publish workflow against the Production environment.
-1. Validate the tag, release, and change log.
+1. Validate the GitHub release and tag.
 1. Validate PyPi was published properly.
 1. Label the issues as res::complete and mark as "Completed".
 1. Close the Milestone.
 1. Update the source in Perforce.
 1. If this was a release branch, merge to main.
 
-<!--- cSpell:ignore vjer virtualenv -->
+<!--- cSpell:ignore virtualenv vjer -->
