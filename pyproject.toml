@@ -51,7 +51,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# dev = []
+dev = ["git-cliff"]
 test = ["types-PyYAML", "types-requests"]
 # doc = []
 

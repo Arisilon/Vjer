@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       skip-pypi-test:
+        description: Skip PyPI test
         type: boolean
   push:
     branches:
