@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Upgrade to latest Sphinx toolset.
 - Automate change log generation. (GitHub #12)
+- Fix publishing modules with hyphen in name. (GitHub #47)
 
 ## [40.1.0] - 2026-06-19
 
